@@ -5,7 +5,7 @@ import celebrate from "../assets/animations/celebrate.json";
 import heart from "../assets/animations/heart.json";
 import Lottie from "lottie-react";
 
-const Purpose = () => {
+const LoveMe = () => {
   const { width, height } = useWindowSize();
   const noRef = useRef();
   const yesRef = useRef();
@@ -97,4 +97,4 @@ const Purpose = () => {
   );
 };
 
-export default Purpose;
+export default LoveMe;

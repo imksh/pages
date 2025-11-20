@@ -10,7 +10,7 @@ const Home = () => {
 
       <div className="flex flex-col gap-5">
         <button
-          onClick={() => navigate("/purpose")}
+          onClick={() => navigate("/loveMe")}
           className="px-6 py-3 bg-blue-500 text-white rounded-md cursor-pointer"
         >
           Proposal Page
