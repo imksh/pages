@@ -13,7 +13,7 @@ const Home = () => {
           onClick={() => navigate("/loveMe")}
           className="px-6 py-3 bg-blue-500 text-white rounded-md cursor-pointer"
         >
-          Proposal Page
+          Love Me?
         </button>
       </div>
     </div>
