@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+.shadow {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.gradient1 {
+  background-image: linear-gradient(
+    to right bottom,
+    #3c8df7,
+    #009bf9,
+    #00a8f7,
+    #00b3f2,
+    #12bdeb
+  );
+}

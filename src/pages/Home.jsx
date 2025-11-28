@@ -15,6 +15,12 @@ const Home = () => {
         >
           Love Me?
         </button>
+        <button
+          onClick={() => navigate("/ludo")}
+          className="px-6 py-3 bg-blue-500 text-white rounded-md cursor-pointer"
+        >
+          Snake & Ladder
+        </button>
       </div>
     </div>
   );
