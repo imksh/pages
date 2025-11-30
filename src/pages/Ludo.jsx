@@ -227,48 +227,47 @@ const Ludo = () => {
           </div>
         </div>
         <div className="game grid grid-cols-10 w-fit border-3 relative">
+          <img
+            src="/images/ludo/ladder.png"
+            alt="ladder"
+            className="absolute z-20 w-16 top-13 lg:w-30 lg:top-23"
+          />
+          <img
+            src="/images/ludo/ladder.png"
+            alt="ladder"
+            className="absolute z-20 w-20 h-23 top-46 left-31 lg:w-30 lg:h-48 lg:top-77 lg:left-58"
+          />
+          <img
+            src="/images/ludo/ladder.png"
+            alt="ladder"
+            className="absolute z-20 w-20 h-42 top-21 left-46 lg:w-30 lg:h-75 lg:top-35 lg:left-82 rotate-x-180 rotate-180"
+          />
+
+          <img
+            src="/images/ludo/ladder.png"
+            alt="ladder"
+            className="absolute z-20 w-20 h-23 top-5 -right-2 lg:w-30 lg:h-45 lg:top-10 lg:right-0"
+          />
+
+          <img
+            src="/images/ludo/ladder.png"
+            alt="ladder"
+            className="absolute z-20 w-24 h-21 top-35 left-7 lg:w-33 lg:h-40 lg:top-59 lg:left-18 rotate-x-180 rotate-180 rotate-z-12"
+          />
+
+          <img
+            src="/images/ludo/snake.png"
+            alt="snake"
+            className="absolute z-30 w-23 top-3 left-8 lg:w-30 lg:top-8 lg:left-17"
+          />
+
+          <img
+            src="/images/ludo/snake.png"
+            alt="snake"
+            className="absolute z-30 h-20 top-28 left-10 lg:h-35 lg:top-48 lg:left-20"
+          />
           {cells.map((n) => (
             <>
-              <img
-                src="/images/ludo/ladder.png"
-                alt="ladder"
-                className="absolute z-20 w-16 top-13 lg:w-30 lg:top-23"
-              />
-              <img
-                src="/images/ludo/ladder.png"
-                alt="ladder"
-                className="absolute z-20 w-20 h-23 top-46 left-31 lg:w-30 lg:h-48 lg:top-77 lg:left-58"
-              />
-              <img
-                src="/images/ludo/ladder.png"
-                alt="ladder"
-                className="absolute z-20 w-20 h-42 top-21 left-46 lg:w-30 lg:h-75 lg:top-35 lg:left-82 rotate-x-180 rotate-180"
-              />
-
-              <img
-                src="/images/ludo/ladder.png"
-                alt="ladder"
-                className="absolute z-20 w-20 h-23 top-5 -right-2 lg:w-30 lg:h-45 lg:top-10 lg:right-0"
-              />
-
-              <img
-                src="/images/ludo/ladder.png"
-                alt="ladder"
-                className="absolute z-20 w-24 h-21 top-35 left-7 lg:w-33 lg:h-40 lg:top-59 lg:left-18 rotate-x-180 rotate-180 rotate-z-12"
-              />
-
-              <img
-                src="/images/ludo/snake.png"
-                alt="snake"
-                className="absolute z-30 w-23 top-3 left-8 lg:w-30 lg:top-8 lg:left-17"
-              />
-
-              <img
-                src="/images/ludo/snake.png"
-                alt="snake"
-                className="absolute z-30 h-20 top-28 left-10 lg:h-35 lg:top-48 lg:left-20"
-              />
-
               <div
                 key={n}
                 className="w-8 h-8 lg:w-14 lg:h-14 border border-black relative flex justify-center items-center gap-2"
