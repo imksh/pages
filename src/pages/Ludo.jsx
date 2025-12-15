@@ -184,7 +184,7 @@ const Ludo = () => {
       </div>
       <div className="flex flex-col lg:flex-row min-w-screen justify-center items-center mt-15">
         {winner && (
-          <div className="absolute bg-green-600 text-white w-[50vw] h-[50vh]  rounded-2xl flex justify-center gap-8 items-center flex-col z-50">
+          <div className="absolute bg-green-600 text-white w-[70vw] h-[50vh]  rounded-2xl flex justify-center gap-8 items-center flex-col z-50 text-center ">
             <h1 className="text-4xl bold">{winner} is Winner</h1>
             <button
               className={`px-5 py-1  rounded text-white cursor-pointer z-50 bg-red-500`}
