@@ -4,7 +4,7 @@ import Animation from "../components/Animation";
 import celebrate from "../assets/animations/celebrate.json";
 import heart from "../assets/animations/heart.json";
 import Lottie from "lottie-react";
-import toast from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 
 const LoveMe = () => {
   const { width, height } = useWindowSize();
@@ -61,50 +61,53 @@ const LoveMe = () => {
     heartRef.current.style.display = "flex";
   };
   return (
-    <div className="min-h-screen w-screen bg-pink-400 text-white  p-10 text-center font-bold">
-      <div className="flex flex-col justify-center items-center pt-[5%] ">
-        <h1
-          ref={textRef}
-          className="text-2xl font-extrabold md:text-3xl lg:text-5xl"
-        >
-          Do you Love me?
-        </h1>
-        <div className="flex gap-4 md:gap-14 mt-10 min-w-[220px]  md:min-w-[360px] justify-baseline">
-          <button
-            className="border-2 h-[50px] w-[100px] md:h-[80px] md:w-[150px] cursor-pointer relative"
-            ref={yesRef}
-            onClick={handleYes}
+    <>
+      <div className="min-h-screen w-screen bg-pink-400 text-white  p-10 text-center font-bold">
+        <div className="flex flex-col justify-center items-center pt-[5%] ">
+          <h1
+            ref={textRef}
+            className="text-2xl font-extrabold md:text-3xl lg:text-5xl"
           >
-            Yes
-          </button>
-          <button
-            className="border-2 cursor-pointer h-[50px] w-[100px] md:h-[80px] md:w-[150px] z-10"
-            ref={noRef}
-            onClick={handleNo}
-          >
-            No
-          </button>
-          <p
-            className="hidden cursor-pointer h-[80px] w-full md:text-2xl"
-            ref={acceptedRef}
-          >
-            Love You too ❤️
-          </p>
-        </div>
-        <div className="absolute hidden " ref={celebrateRef}>
-          <Lottie animationData={celebrate} loop={true} />
-        </div>
-        <div
-          className=" flex-col justify-center items-center hidden mt-5"
-          ref={heartRef}
-        >
-          <h1 className="text-center md:text-2xl">
-            I knew you’d say yes… but I still can’t stop smiling.
+            Do you Love me?
           </h1>
-          <Animation data={heart} />
+          <div className="flex gap-4 md:gap-14 mt-10 min-w-[220px]  md:min-w-[360px] justify-baseline">
+            <button
+              className="border-2 h-[50px] w-[100px] md:h-[80px] md:w-[150px] cursor-pointer relative"
+              ref={yesRef}
+              onClick={handleYes}
+            >
+              Yes
+            </button>
+            <button
+              className="border-2 cursor-pointer h-[50px] w-[100px] md:h-[80px] md:w-[150px] z-10"
+              ref={noRef}
+              onClick={handleNo}
+            >
+              No
+            </button>
+            <p
+              className="hidden cursor-pointer h-[80px] w-full md:text-2xl"
+              ref={acceptedRef}
+            >
+              Love You too ❤️
+            </p>
+          </div>
+          <div className="absolute hidden " ref={celebrateRef}>
+            <Lottie animationData={celebrate} loop={true} />
+          </div>
+          <div
+            className=" flex-col justify-center items-center hidden mt-5"
+            ref={heartRef}
+          >
+            <h1 className="text-center md:text-2xl">
+              I knew you’d say yes… but I still can’t stop smiling.
+            </h1>
+            <Animation data={heart} />
+          </div>
         </div>
       </div>
-    </div>
+      <Toaster />
+    </>
   );
 };
 

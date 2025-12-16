@@ -7,9 +7,10 @@ import { FaCheckSquare, FaPaintBrush } from "react-icons/fa";
 import { LuEraser } from "react-icons/lu";
 import { LuRedo2, LuUndo2 } from "react-icons/lu";
 import { MdOutlineDeleteForever, MdOutlineSaveAlt } from "react-icons/md";
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import Alert from "../components/Alert";
 import { IoMdMenu } from "react-icons/io";
+import { AiOutlineClose } from "react-icons/ai";
 
 const Paint = () => {
   const [tool, setTool] = useState("brush");
@@ -33,6 +34,26 @@ const Paint = () => {
     fun: null,
     setShow: setShowAlert,
   });
+
+  const toggleTool = () => {
+    const tools = ["rect", "line", "brush", "eraser", "circle", "triangle"];
+    const n = Math.floor(Math.random() * 6);
+    setTool(tools[n]);
+  };
+  const toggleColor = () => {
+    const colors = [
+      "red",
+      "green",
+      "red",
+      "blue",
+      "yellow",
+      "pink",
+      "white",
+      "black",
+    ];
+    const n = Math.floor(Math.random() * 8);
+    setColor(colors[n]);
+  };
 
   const getPos = (e) => {
     const rect = canvasRef.current.getBoundingClientRect();
@@ -203,6 +224,14 @@ const Paint = () => {
 
   const undo = () => {
     if (drawingStack.length <= 1) {
+      ctxRef.current.fillStyle = "#fff";
+      ctxRef.current.fillRect(
+        0,
+        0,
+        canvasRef.current.width,
+        canvasRef.current.height
+      );
+      setDrawingStack([]);
       toast.error("Nothing to Undo");
       return;
     }
@@ -237,6 +266,7 @@ const Paint = () => {
     );
     setRedoStack([]);
     setDrawingStack([]);
+    toast.success("Canvas Cleared");
   };
 
   const save = () => {
@@ -263,82 +293,137 @@ const Paint = () => {
     a.click();
 
     ctx.putImageData(imageData, 0, 0);
+    toast.success("Image Downloaded");
   };
 
   return (
     <>
       <div className="overflow-hidden">
-        <div className="bg-blue-600 text-white h-[10dvh] w-full fixed top-0 left-0 flex items-center px-4 lg:px-10 lg:justify-center">
+        <div className="bg-blue-600 text-white h-[10dvh] w-full fixed top-0 left-0 flex items-center justify-between px-2 lg:px-10 lg:justify-center">
           <div className="flex gap-3 items-center">
             <button onClick={() => setShow(!show)}>
-              <IoMdMenu size={24} className="flex lg:hidden" />
+              {show ? (
+                <AiOutlineClose size={24} className="flex lg:hidden" />
+              ) : (
+                <IoMdMenu size={24} className="flex lg:hidden" />
+              )}
             </button>
             <h1 className="text-2xl lg:text-4xl font-bold">Paint</h1>
           </div>
+          <div className="flex lg:hidden gap-3 items-center justify-center">
+            <button onClick={() => setFill(!fill)}>
+              {fill ? (
+                <FaCheckSquare className="text-green-500 w-6 h-6" />
+              ) : (
+                <FaRegSquare className=" w-6 h-6" />
+              )}
+            </button>
+
+            <button
+              onClick={toggleColor}
+              className={`w-7 h-7 rounded-full border-2 ${
+                color === "white" ? "border-black" : "border-white"
+              }`}
+              style={{ backgroundColor: color }}
+            ></button>
+            <button
+              className="flex border-2 justify-center w-7 h-7 items-center rounded-full "
+              onClick={toggleTool}
+            >
+              {tool === "brush" && <FaPaintBrush size={12} />}
+              {tool === "eraser" && <LuEraser size={12} />}
+              {tool === "rect" && <FaRegSquare size={12} />}
+              {tool === "line" && <TbLine size={12} />}
+              {tool === "circle" && <VscCircleLarge size={12} />}
+              {tool === "triangle" && <IoTriangleOutline size={12} />}
+            </button>
+            <button
+              className={` py-1.5 px-3 border  flex justify-center items-center rounded cursor-pointer  bg-blue-500 hover:bg-green-500`}
+              onClick={undo}
+            >
+              <LuUndo2 size={16} />
+            </button>
+          </div>
         </div>
         <div className="w-full h-[90dvh] flex mt-[10dvh]">
-          <div className="hidden lg:flex flex-col section1 w-[15%] h-full gradient1  text-white p-2 ">
+          <div className="hidden lg:flex flex-col section1 w-[20%] h-full gradient1  text-white p-2 overflow-auto hide-scrollbar py-4">
             <div>
-              <p className="font-bold mb-2 mt-4 text-[20px]">Shapes</p>
-              <div className="grid grid-cols-2 content-center place-items-center gap-2">
+              <p className="font-bold mb-2  text-[20px]">Shapes</p>
+              <div className="grid grid-cols-4 content-center place-items-center gap-2">
                 <button
-                  className={`p-3 border-2 rounded-full w-fit cursor-pointer ${
+                  className={`p-2 border-2 rounded-full w-fit cursor-pointer ${
                     tool === "line" ? "bg-green-500" : ""
                   } `}
-                  onClick={() => setTool("line")}
+                  onClick={() => {
+                    setTool("line");
+                    setShow(false);
+                  }}
                 >
-                  <TbLine size="18" />
+                  <TbLine size="16" />
                 </button>
                 <button
-                  className={`p-3 border-2 rounded-full w-fit cursor-pointer ${
+                  className={`p-2 border-2 rounded-full w-fit cursor-pointer ${
                     tool === "rect" ? "bg-green-500" : ""
                   } `}
-                  onClick={() => setTool("rect")}
+                  onClick={() => {
+                    setTool("rect");
+                    setShow(false);
+                  }}
                 >
-                  <FaRegSquare size="18" />
+                  <FaRegSquare size="16" />
                 </button>
                 <button
-                  className={`p-3 border-2 rounded-full w-fit cursor-pointer ${
+                  className={`p-2 border-2 rounded-full w-fit cursor-pointer ${
                     tool === "circle" ? "bg-green-500" : ""
                   } `}
-                  onClick={() => setTool("circle")}
+                  onClick={() => {
+                    setTool("circle");
+                    setShow(false);
+                  }}
                 >
-                  <VscCircleLarge size="18" />
+                  <VscCircleLarge size="16" />
                 </button>
                 <button
-                  className={`p-3 border-2 rounded-full w-fit cursor-pointer ${
+                  className={`p-2 border-2 rounded-full w-fit cursor-pointer ${
                     tool === "triangle" ? "bg-green-500" : ""
                   } `}
-                  onClick={() => setTool("triangle")}
-                >
-                  <IoTriangleOutline size="18" />
-                </button>
-              </div>
-              <div className="flex  py-3 px-4 border  my-4 rounded-2xl cursor-pointer mx-auto justify-center items-center">
-                <button
                   onClick={() => {
-                    setFill((prev) => !prev);
+                    setTool("triangle");
+                    setShow(false);
                   }}
-                  className="cursor-pointer flex items-center justify-center gap-2"
                 >
-                  {fill ? (
-                    <FaCheckSquare size="20" className="" />
-                  ) : (
-                    <FaRegSquare size="20" />
-                  )}
-                  Fill Color
+                  <IoTriangleOutline size="16" />
                 </button>
               </div>
+              <button
+                className={`flex  py-2 px-4 border  my-4 rounded-2xl mx-auto justify-center items-center cursor-pointer w-[80%] gap-3 ${
+                  fill ? "bg-green-500" : ""
+                }`}
+                onClick={() => {
+                  setFill((prev) => !prev);
+                  setShow(false);
+                }}
+              >
+                {fill ? (
+                  <FaCheckSquare size="20" className="" />
+                ) : (
+                  <FaRegSquare size="20" />
+                )}
+                Fill Color
+              </button>
             </div>
 
             <div>
-              <p className="font-bold mb-2 mt-4 text-[20px]">Tools</p>
+              <p className="font-bold mb-2 text-[20px]">Tools</p>
               <div className="grid grid-cols-2 content-center place-items-center gap-2">
                 <button
                   className={`p-3 border-2 rounded-full w-fit cursor-pointer ${
                     tool === "brush" ? "bg-green-500" : ""
                   } `}
-                  onClick={() => setTool("brush")}
+                  onClick={() => {
+                    setTool("brush");
+                    setShow(false);
+                  }}
                 >
                   <FaPaintBrush size="18" />
                 </button>
@@ -346,7 +431,10 @@ const Paint = () => {
                   className={`p-3 border-2 rounded-full w-fit cursor-pointer ${
                     tool === "eraser" ? "bg-green-500" : ""
                   } `}
-                  onClick={() => setTool("eraser")}
+                  onClick={() => {
+                    setTool("eraser");
+                    setShow(false);
+                  }}
                 >
                   <LuEraser size="18" />
                 </button>
@@ -356,59 +444,81 @@ const Paint = () => {
                 <input
                   type="range"
                   min={0}
-                  max={10}
+                  max={20}
                   step={1}
                   value={size}
                   onChange={(e) => setSize(e.target.value)}
+                  className="w-[80%]"
                 />
               </div>
             </div>
 
             <div>
-              <p className="font-bold mb-2 mt-4 text-[20px]">Colors</p>
+              <p className="font-bold mb-2 text-[20px]">Colors</p>
               <div className="grid grid-cols-4 content-center place-items-center gap-3">
                 <button
                   className={`p-3 border-2   bg-black rounded-full cursor-pointer ${
                     color === "black" ? " border-white" : "border-black"
                   } `}
-                  onClick={() => setColor("black")}
+                  onClick={() => {
+                    setColor("black");
+                    setShow(false);
+                  }}
                 ></button>
                 <button
                   className={`p-3 border-2  bg-white rounded-full cursor-pointer ${
                     color === "white" ? " border-black" : "border-white"
                   } `}
-                  onClick={() => setColor("white")}
+                  onClick={() => {
+                    setColor("white");
+                    setShow(false);
+                  }}
                 ></button>
                 <button
                   className={`p-3 border-2  bg-red-700 rounded-full cursor-pointer ${
                     color === "red" ? " border-white" : "border-red-700"
                   } `}
-                  onClick={() => setColor("red")}
+                  onClick={() => {
+                    setColor("red");
+                    setShow(false);
+                  }}
                 ></button>
                 <button
                   className={`p-3 border-2  bg-green-700 rounded-full cursor-pointer ${
                     color === "green" ? " border-white" : "border-green-700"
                   } `}
-                  onClick={() => setColor("green")}
+                  onClick={() => {
+                    setColor("green");
+                    setShow(false);
+                  }}
                 ></button>
                 <button
                   className={`p-3 border-2 bg-blue-700 rounded-full cursor-pointer ${
                     color === "blue" ? " border-white" : " border-blue-700"
                   }`}
-                  onClick={() => setColor("blue")}
+                  onClick={() => {
+                    setColor("blue");
+                    setShow(false);
+                  }}
                 ></button>
 
                 <button
                   className={`p-3 border-2 bg-yellow-400  rounded-full cursor-pointer ${
                     color === "yellow" ? " border-white" : " border-yellow-400"
                   } `}
-                  onClick={() => setColor("yellow")}
+                  onClick={() => {
+                    setColor("yellow");
+                    setShow(false);
+                  }}
                 ></button>
                 <button
                   className={`p-3 border-2  bg-pink-400 rounded-full cursor-pointer ${
                     color === "pink" ? " border-white" : "border-pink-400"
                   } `}
-                  onClick={() => setColor("pink")}
+                  onClick={() => {
+                    setColor("pink");
+                    setShow(false);
+                  }}
                 ></button>
                 <label
                   htmlFor="selectColor"
@@ -439,21 +549,21 @@ const Paint = () => {
             <div>
               <p className="font-bold mb-2 mt-4 text-[20px]">Actions</p>
 
-              <div className="flex justify-between items-center flex-wrap gap-4">
+              <div className="flex justify-between items-center flex-wrap gap-4 px-4 py-1">
                 <button
-                  className={` py-1 border w-[40%] flex justify-center items-center rounded cursor-pointer `}
+                  className={` py-2 border w-[40%] flex justify-center items-center rounded cursor-pointer  bg-blue-500 hover:bg-green-500`}
                   onClick={undo}
                 >
                   <LuUndo2 size={24} />
                 </button>
                 <button
-                  className={` py-1 border w-[40%] flex justify-center items-center rounded cursor-pointer `}
+                  className={` py-2 border w-[40%] flex justify-center items-center rounded cursor-pointer  bg-blue-500 hover:bg-green-500`}
                   onClick={redo}
                 >
                   <LuRedo2 size={24} />
                 </button>
                 <button
-                  className={` py-1 border w-[40%] flex justify-center items-center rounded cursor-pointer `}
+                  className={` py-2 border w-[40%] flex justify-center items-center rounded cursor-pointer  bg-red-600 hover:bg-red-500`}
                   onClick={() => {
                     setAlert({
                       name: "Clear Canvas",
@@ -467,7 +577,7 @@ const Paint = () => {
                   <MdOutlineDeleteForever size={24} />
                 </button>
                 <button
-                  className={` py-1 border w-[40%] flex justify-center items-center rounded cursor-pointer `}
+                  className={` py-2 border w-[40%] flex justify-center items-center rounded cursor-pointer bg-blue-500 hover:bg-green-500`}
                   onClick={() => {
                     setAlert({
                       name: "Download Image",
@@ -485,7 +595,7 @@ const Paint = () => {
           </div>
           <canvas
             id="canvas"
-            className="w-[100%]lg:w-[85%] cursor-pointer"
+            className="lg:w-[80%] cursor-pointer"
             ref={canvasRef}
             onMouseDown={(e) => start(e)}
             onMouseUp={() => end()}
@@ -498,70 +608,84 @@ const Paint = () => {
         </div>
 
         {show && (
-          <div className="absolute top-[10dvh] left-0 z-50 flex flex-col section1 w-full  gradient1  text-white p-2 h-[90dvh] ">
+          <div className="absolute top-[10dvh] left-0 z-50 flex lg:hidden flex-col section1 w-full  gradient1  text-white p-2 h-[90dvh] overflow-auto hide-scrollbar">
             <div>
-              <p className="font-bold mb-2 mt-4 text-[20px]">Shapes</p>
+              <p className="font-bold mb-2  text-[20px]">Shapes</p>
               <div className="grid grid-cols-4 content-center place-items-center gap-2">
                 <button
-                  className={`w-10 h-10 border rounded-full cursor-pointer ${
+                  className={`p-2 border-2 rounded-full w-fit cursor-pointer ${
                     tool === "line" ? "bg-green-500" : ""
                   } `}
-                  onClick={() => setTool("line")}
+                  onClick={() => {
+                    setTool("line");
+                    setShow(false);
+                  }}
                 >
-                  <button onClick={() => setShow(!show)}>
-                    <TbLine size="16" />
-                  </button>
+                  <TbLine size="16" />
                 </button>
                 <button
-                  className={`w-10 h-10 border flex justify-center items-center rounded-full text-center cursor-pointer ${
+                  className={`p-2 border-2 rounded-full w-fit cursor-pointer ${
                     tool === "rect" ? "bg-green-500" : ""
                   } `}
-                  onClick={() => setTool("rect")}
+                  onClick={() => {
+                    setTool("rect");
+                    setShow(false);
+                  }}
                 >
                   <FaRegSquare size="16" />
                 </button>
                 <button
-                  className={`w-10 h-10 border flex justify-center items-center rounded-full  cursor-pointer ${
+                  className={`p-2 border-2 rounded-full w-fit cursor-pointer ${
                     tool === "circle" ? "bg-green-500" : ""
                   } `}
-                  onClick={() => setTool("circle")}
+                  onClick={() => {
+                    setTool("circle");
+                    setShow(false);
+                  }}
                 >
                   <VscCircleLarge size="16" />
                 </button>
                 <button
-                  className={`w-10 h-10 border flex justify-center items-center rounded-full  cursor-pointer ${
+                  className={`p-2 border-2 rounded-full w-fit cursor-pointer ${
                     tool === "triangle" ? "bg-green-500" : ""
                   } `}
-                  onClick={() => setTool("triangle")}
+                  onClick={() => {
+                    setTool("triangle");
+                    setShow(false);
+                  }}
                 >
                   <IoTriangleOutline size="16" />
                 </button>
               </div>
-              <div className="flex  py-2 px-4 border  my-4 rounded-2xl cursor-pointer mx-auto justify-center items-center">
-                <button
-                  onClick={() => {
-                    setFill((prev) => !prev);
-                  }}
-                  className="cursor-pointer flex items-center justify-center gap-2"
-                >
-                  {fill ? (
-                    <FaCheckSquare size="20" className="" />
-                  ) : (
-                    <FaRegSquare size="20" />
-                  )}
-                  Fill Color
-                </button>
-              </div>
+              <button
+                className={`flex  py-2 px-4 border  my-4 rounded-2xl mx-auto justify-center items-center cursor-pointer w-[80%] gap-3 ${
+                  fill ? "bg-green-500" : ""
+                }`}
+                onClick={() => {
+                  setFill((prev) => !prev);
+                  setShow(false);
+                }}
+              >
+                {fill ? (
+                  <FaCheckSquare size="20" className="" />
+                ) : (
+                  <FaRegSquare size="20" />
+                )}
+                Fill Color
+              </button>
             </div>
 
             <div>
-              <p className="font-bold mb-2  text-[20px]">Tools</p>
+              <p className="font-bold mb-2 text-[20px]">Tools</p>
               <div className="grid grid-cols-2 content-center place-items-center gap-2">
                 <button
                   className={`p-3 border-2 rounded-full w-fit cursor-pointer ${
                     tool === "brush" ? "bg-green-500" : ""
                   } `}
-                  onClick={() => setTool("brush")}
+                  onClick={() => {
+                    setTool("brush");
+                    setShow(false);
+                  }}
                 >
                   <FaPaintBrush size="18" />
                 </button>
@@ -569,7 +693,10 @@ const Paint = () => {
                   className={`p-3 border-2 rounded-full w-fit cursor-pointer ${
                     tool === "eraser" ? "bg-green-500" : ""
                   } `}
-                  onClick={() => setTool("eraser")}
+                  onClick={() => {
+                    setTool("eraser");
+                    setShow(false);
+                  }}
                 >
                   <LuEraser size="18" />
                 </button>
@@ -579,7 +706,7 @@ const Paint = () => {
                 <input
                   type="range"
                   min={0}
-                  max={10}
+                  max={20}
                   step={1}
                   value={size}
                   onChange={(e) => setSize(e.target.value)}
@@ -589,50 +716,71 @@ const Paint = () => {
             </div>
 
             <div>
-              <p className="font-bold mb-2  text-[20px]">Colors</p>
+              <p className="font-bold mb-2 text-[20px]">Colors</p>
               <div className="grid grid-cols-4 content-center place-items-center gap-3">
                 <button
                   className={`p-3 border-2   bg-black rounded-full cursor-pointer ${
                     color === "black" ? " border-white" : "border-black"
                   } `}
-                  onClick={() => setColor("black")}
+                  onClick={() => {
+                    setColor("black");
+                    setShow(false);
+                  }}
                 ></button>
                 <button
                   className={`p-3 border-2  bg-white rounded-full cursor-pointer ${
                     color === "white" ? " border-black" : "border-white"
                   } `}
-                  onClick={() => setColor("white")}
+                  onClick={() => {
+                    setColor("white");
+                    setShow(false);
+                  }}
                 ></button>
                 <button
                   className={`p-3 border-2  bg-red-700 rounded-full cursor-pointer ${
                     color === "red" ? " border-white" : "border-red-700"
                   } `}
-                  onClick={() => setColor("red")}
+                  onClick={() => {
+                    setColor("red");
+                    setShow(false);
+                  }}
                 ></button>
                 <button
                   className={`p-3 border-2  bg-green-700 rounded-full cursor-pointer ${
                     color === "green" ? " border-white" : "border-green-700"
                   } `}
-                  onClick={() => setColor("green")}
+                  onClick={() => {
+                    setColor("green");
+                    setShow(false);
+                  }}
                 ></button>
                 <button
                   className={`p-3 border-2 bg-blue-700 rounded-full cursor-pointer ${
                     color === "blue" ? " border-white" : " border-blue-700"
                   }`}
-                  onClick={() => setColor("blue")}
+                  onClick={() => {
+                    setColor("blue");
+                    setShow(false);
+                  }}
                 ></button>
 
                 <button
                   className={`p-3 border-2 bg-yellow-400  rounded-full cursor-pointer ${
                     color === "yellow" ? " border-white" : " border-yellow-400"
                   } `}
-                  onClick={() => setColor("yellow")}
+                  onClick={() => {
+                    setColor("yellow");
+                    setShow(false);
+                  }}
                 ></button>
                 <button
                   className={`p-3 border-2  bg-pink-400 rounded-full cursor-pointer ${
                     color === "pink" ? " border-white" : "border-pink-400"
                   } `}
-                  onClick={() => setColor("pink")}
+                  onClick={() => {
+                    setColor("pink");
+                    setShow(false);
+                  }}
                 ></button>
                 <label
                   htmlFor="selectColor"
@@ -663,21 +811,21 @@ const Paint = () => {
             <div>
               <p className="font-bold mb-2 mt-4 text-[20px]">Actions</p>
 
-              <div className="flex justify-between items-center flex-wrap gap-4">
+              <div className="flex justify-between items-center flex-wrap gap-4 px-4 py-1">
                 <button
-                  className={` py-1 border w-[40%] flex justify-center items-center rounded cursor-pointer `}
+                  className={` py-2 border w-[40%] flex justify-center items-center rounded cursor-pointer  bg-blue-500 hover:bg-green-500`}
                   onClick={undo}
                 >
                   <LuUndo2 size={24} />
                 </button>
                 <button
-                  className={` py-1 border w-[40%] flex justify-center items-center rounded cursor-pointer `}
+                  className={` py-2 border w-[40%] flex justify-center items-center rounded cursor-pointer  bg-blue-500 hover:bg-green-500`}
                   onClick={redo}
                 >
                   <LuRedo2 size={24} />
                 </button>
                 <button
-                  className={` py-1 border w-[40%] flex justify-center items-center rounded cursor-pointer `}
+                  className={` py-2 border w-[40%] flex justify-center items-center rounded cursor-pointer  bg-red-600 hover:bg-red-500`}
                   onClick={() => {
                     setAlert({
                       name: "Clear Canvas",
@@ -686,12 +834,13 @@ const Paint = () => {
                       setShow: setShowAlert,
                     });
                     setShowAlert(true);
+                    setShow(false);
                   }}
                 >
                   <MdOutlineDeleteForever size={24} />
                 </button>
                 <button
-                  className={` py-1 border w-[40%] flex justify-center items-center rounded cursor-pointer `}
+                  className={` py-2 border w-[40%] flex justify-center items-center rounded cursor-pointer bg-blue-500 hover:bg-green-500`}
                   onClick={() => {
                     setAlert({
                       name: "Download Image",
@@ -700,6 +849,7 @@ const Paint = () => {
                       setShow: setShowAlert,
                     });
                     setShowAlert(true);
+                    setShow(false);
                   }}
                 >
                   <MdOutlineSaveAlt size={24} />
@@ -717,6 +867,7 @@ const Paint = () => {
           setShow={setShowAlert}
         />
       )}
+      <Toaster position="bottom-center" reverseOrder={false} />
     </>
   );
 };

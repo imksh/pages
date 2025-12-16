@@ -23,7 +23,7 @@ const App = () => {
       <Route path="/galary/karan-galary" element={<KaranGalary />} />
       <Route path="/paint" element={<Paint />} />
     </Routes>
-    <Toaster />
+    {/* <Toaster /> */}
     </>
   );
 };
