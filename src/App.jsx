@@ -8,6 +8,7 @@ import Galary from './pages/Galary';
 import Bhawna from './private/Bhawna';
 import PapaMummy from './private/PapaMummy';
 import KaranGalary from './pages/KaranGalary';
+import Paint from './pages/Paint';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
       <Route path="/private/bhawna" element={<Bhawna />} />
       <Route path="/private/papa-mummy" element={<PapaMummy />} />
       <Route path="/galary/karan-galary" element={<KaranGalary />} />
+      <Route path="/paint" element={<Paint />} />
     </Routes>
     <Toaster />
     </>

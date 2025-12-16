@@ -15,3 +15,7 @@
     #12bdeb
   );
 }
+
+.colorGradient{
+  background-image: linear-gradient(to right top, #f02200, #e86500, #d79100, #beb500, #9ed500, #72dc55, #44e086, #00e1af, #00c6db, #00a4ff, #0078ff, #0800fe);
+}

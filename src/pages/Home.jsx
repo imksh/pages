@@ -35,8 +35,16 @@ const Home = () => {
           >
             Galary
           </button>
+          <button
+            onClick={() => navigate("/paint")}
+            className="px-6 py-3 bg-blue-500 text-white rounded-md cursor-pointer"
+          >
+            Paint
+          </button>
         </div>
       </div>
+      
+      
 
       {/* <div className="absolute bottom-0 left-[5%] border-t w-[90%] p-4 flex justify-center items-center">
         <p>©️ IdioticMinds</p>
