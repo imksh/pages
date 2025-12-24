@@ -24,7 +24,7 @@ const Home = () => {
             Love Me?
           </button>
           <button
-            onClick={() => navigate("/ludo")}
+            onClick={() => navigate("/snake-and-ladder")}
             className="px-6 py-3 bg-blue-500 text-white rounded-md cursor-pointer"
           >
             Snake & Ladder
@@ -41,6 +41,14 @@ const Home = () => {
           >
             Paint
           </button>
+
+          <button
+            onClick={() => navigate("/camera")}
+            className="px-6 py-3 bg-blue-500 text-white rounded-md cursor-pointer"
+          >
+            Camera
+          </button>
+         
         </div>
       </div>
       

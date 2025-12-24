@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-
-
 .shadow {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
@@ -16,10 +14,58 @@
   );
 }
 
-.colorGradient{
-  background-image: linear-gradient(to right top, #f02200, #e86500, #d79100, #beb500, #9ed500, #72dc55, #44e086, #00e1af, #00c6db, #00a4ff, #0078ff, #0800fe);
+.colorGradient {
+  background-image: linear-gradient(
+    to right top,
+    #f02200,
+    #e86500,
+    #d79100,
+    #beb500,
+    #9ed500,
+    #72dc55,
+    #44e086,
+    #00e1af,
+    #00c6db,
+    #00a4ff,
+    #0078ff,
+    #0800fe
+  );
 }
 
-.hide-scrollbar{
+.hide-scrollbar {
   scrollbar-width: none;
+}
+
+/* camera filter */
+
+.natural {
+  filter: brightness(100%) contrast(100%) saturate(100%);
+}
+
+.vintage {
+  filter: sepia(55%) contrast(120%) brightness(102%);
+}
+
+.black-white {
+  filter: grayscale(100%) contrast(140%) brightness(105%);
+}
+
+.warm {
+  filter: brightness(108%) contrast(115%) saturate(135%) sepia(18%);
+}
+
+.cool {
+  filter: brightness(98%) contrast(110%) saturate(120%) hue-rotate(190deg);
+}
+
+.hdr {
+  filter: contrast(145%) brightness(112%) saturate(120%);
+}
+
+.cinematic {
+  filter: brightness(95%) contrast(125%) saturate(110%) hue-rotate(160deg);
+}
+
+.soft{
+  filter: brightness(110%) contrast(95%) saturate(105%);
 }
