@@ -15,12 +15,13 @@ function Camera() {
   const [options, setOptions] = useState("filter");
   const [college, setCollege] = useState(true);
   const [rotate, setRotate] = useState(false);
+  const [rear, setRear] = useState(false);
   useEffect(() => {
     setRotate(true);
     setTimeout(() => {
       setRotate(false);
     }, 500);
-  }, [college]);
+  }, [rear]);
 
   const canvasRef = useRef(null);
 
@@ -48,7 +49,9 @@ function Camera() {
     try {
       const startCamera = async () => {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
+          video: rear
+            ? { facingMode: { exact: "environment" } }
+            : { facingMode: "user" },
           audio: false,
         });
         cameraRef.current.srcObject = stream;
@@ -57,7 +60,7 @@ function Camera() {
     } catch (error) {
       console.log(error);
     }
-  }, [show]);
+  }, [show, rear]);
 
   const downloadImg = async () => {
     const img = await loadImage(image);
@@ -342,23 +345,30 @@ function Camera() {
                 Themes
               </button>
             </div>
-            <div className="flex items-center justify-end w-full relative min-h-14">
+            <div className="flex items-center justify-between w-full relative min-h-14">
               <button
                 className={`p-4 bg-${theme}-300 rounded-full cursor-pointer absolute left-[50%] -translate-x-[50%]`}
                 onClick={capture}
                 disabled={timer}
               >
-                <FaCamera size={20} className="" />
+                <FaCamera size={20} className="text-white" />
               </button>
               <div className="text-white flex gap-2  flex-col justify-center items-center">
                 <button
                   onClick={() => setCollege(!college)}
+                  className={` min-w-16 py-2 bg-${theme}-300 rounded flex flex-col justify-center items-center  cursor-pointer `}
+                >
+                  {college ? "College" : "Single"}
+                </button>
+              </div>
+              <div className="text-white flex gap-2  flex-col justify-center items-center">
+                <button
+                  onClick={() => setRear(!rear)}
                   className={` min-w-16 flex flex-col justify-center items-center  cursor-pointer `}
                 >
                   <FaArrowsRotate
                     className={`${rotate ? "animate-spin" : ""}`}
                   />
-                  {college ? "College" : "Single"}
                 </button>
               </div>
             </div>
