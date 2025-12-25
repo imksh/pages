@@ -243,7 +243,7 @@ function Camera() {
         >
           <Lottie
             animationData={Opening}
-            className={`absolute w-full scale-110 h-[550px] z-20 top-0 left-0 ${
+            className={`absolute w-full scale-160 md:scale-110 h-[550px] z-20 top-0 left-0 ${
               closed ? "block" : "hidden"
             }`}
             lottieRef={animationRef}
@@ -252,7 +252,7 @@ function Camera() {
           />
           <button
             onClick={startOpen}
-            className={`bg-pink-300 hover:bg-pink-500 px-6 py-2 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] z-40 rounded-2xl cursor-pointer ${
+            className={`bg-pink-300 text-white hover:bg-pink-500 px-6 py-2 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] z-40 rounded-2xl cursor-pointer ${
               showBtn ? "block" : "hidden"
             }`}
           >
