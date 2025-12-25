@@ -175,6 +175,7 @@ function Camera() {
       if (!college) {
         setImage(img);
         setShow(true);
+        setSize({ w: canvas.width, h: canvas.height });
         break;
       }
       await sleep(1000);
@@ -184,7 +185,9 @@ function Camera() {
     setTimer(false);
     setShow(true);
     await sleep(0);
-    generateImage(captured, filtersUsed, w, h);
+    if (college) {
+      generateImage(captured, filtersUsed, w, h);
+    }
   };
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
