@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { RiCameraLensLine } from "react-icons/ri";
 import { FaCamera } from "react-icons/fa6";
 import { FaArrowsRotate } from "react-icons/fa6";
+import Opening from "../assets/animations/opening.json";
+import Lottie from "lottie-react";
+import infinity from "../assets/animations/infinity.json";
 
 function Camera() {
   const [filter, setFilter] = useState("natural");
@@ -16,6 +19,19 @@ function Camera() {
   const [college, setCollege] = useState(true);
   const [rotate, setRotate] = useState(false);
   const [rear, setRear] = useState(false);
+  const [closed, setClosed] = useState(true);
+  const [showBtn, setShowBtn] = useState(true);
+  const animationRef = useRef(null);
+
+  const startOpen = () => {
+    setShowBtn(false);
+    animationRef.current?.play();
+
+    setTimeout(() => {
+      setClosed(false);
+    }, 2000);
+  };
+
   useEffect(() => {
     setRotate(true);
     setTimeout(() => {
@@ -222,7 +238,26 @@ function Camera() {
           </div>
         </div>
       ) : (
-        <div className="container w-[90%] md:w-[550px] h-[550px] bg-black rounded-2xl relative flex justify-center items-center flex-col p-4 pb-0 gap-3">
+        <div
+          className={`container w-[90%] md:w-[550px] h-[550px] bg-black rounded-2xl relative flex justify-center items-center flex-col p-4 pb-0 gap-3 overflow-hidden `}
+        >
+          <Lottie
+            animationData={Opening}
+            className={`absolute w-full scale-110 h-[550px] z-20 top-0 left-0 ${
+              closed ? "block" : "hidden"
+            }`}
+            lottieRef={animationRef}
+            loop={false}
+            autoplay={false}
+          />
+          <button
+            onClick={startOpen}
+            className={`bg-pink-300 hover:bg-pink-500 px-6 py-2 absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] z-40 rounded-2xl cursor-pointer ${
+              showBtn ? "block" : "hidden"
+            }`}
+          >
+            Open
+          </button>
           <div className="w-[90%] md:w-[500px] h-[400px] relative">
             {timer && (
               <div
@@ -235,7 +270,7 @@ function Camera() {
               ref={cameraRef}
               autoPlay
               playsInline
-              className={`camera w-full h-full rounded-2xl object-cover rotate-y-180  ${filtersData[filter]}`}
+              className={`camera w-full h-full rounded-2xl object-cover rotate-y-180 ${filtersData[filter]}`}
             ></video>
           </div>
           <div className="controlers grow flex flex-col gap-1 pb-2 justify-center items-center w-full  hide-scrollbar">
