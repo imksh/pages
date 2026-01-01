@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { CgArrowsExchange } from "react-icons/cg";
 import Lottie from "lottie-react";
 import infinity from "../assets/animations/infinity.json";
@@ -24,12 +24,33 @@ const CurrencyConverter = () => {
   const [loading, setLoading] = useState(false);
   const [previous, setPrevious] = useState([]);
   const [history, setHistory] = useState([]);
+  const [recent, setRecent] = useState([]);
+
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem("currencyConverter"));
+    setRecent(items || []);
+  }, []);
 
   useEffect(() => {
     convert();
     previousRate();
     getHistory();
   }, [from, to]);
+
+  const timer = useRef(null);
+
+  useEffect(() => {
+    if (timer.current) clearTimeout(timer.current);
+
+    timer.current = setTimeout(() => {
+      let updated = [{ from, to, result }, ...recent];
+      updated = updated.slice(0, 10);
+      setRecent(updated);
+      localStorage.setItem("currencyConverter", JSON.stringify(updated));
+    }, 5000);
+
+    return () => clearTimeout(timer.current);
+  }, [from, to, result]);
 
   const convert = async () => {
     try {
@@ -202,7 +223,9 @@ const CurrencyConverter = () => {
               />
             </div>
             <div className="md:text-xl font-bold text-blue-500 md:min-w-[50%] flex justify-end items-center grow">
-              <p>{`${input || 0} ${from.split(" ")[0]} = ${(result * input).toFixed(2)} ${to.split(" ")[0]}`}</p>
+              <p>{`${input || 0} ${from.split(" ")[0]} = ${(
+                result * input
+              ).toFixed(2)} ${to.split(" ")[0]}`}</p>
             </div>
           </div>
         </div>
@@ -324,6 +347,53 @@ const CurrencyConverter = () => {
           />
         </LineChart>
       </div>
+
+      <div className="flex flex-col w-[95%] md:w-[70%] mx-auto rounded-2xl overflow-hidden">
+        <h1 className="text-2xl md:text-4xl font-bold text-blue-500 mx-auto mt-16 mb-8">
+          Recent Searches
+        </h1>
+        <div className="grid grid-cols-3 bg-blue-200 p-4 rounded-t-2xl">
+          <div className=" flex items-center justify-center">
+            <p className="text-xl font-bold">From</p>
+          </div>
+          <div className=" flex items-center justify-center">
+            <p className="text-xl font-bold">To</p>
+          </div>
+          <div className=" flex items-center justify-center">
+            <p className="text-xl font-bold">Amount</p>
+          </div>
+        </div>
+        {recent.map((item, idx) => (
+          <div key={idx} className="grid grid-cols-3 bg-blue-100 p-3">
+            <div className="flex gap-2 items-center justify-center">
+              <div className="h-6 w-6 md:h-8 md:w-8 rounded-full overflow-hidden mx-2">
+                <img
+                  src={`https://flagsapi.com/${
+                    item.from.split(" ")[1]
+                  }/flat/64.png`}
+                  className="w-full scale-160 object-cover outline-none "
+                />
+              </div>
+              <p className="text-xl font-bold">{item.from.split(" ")[1]}</p>
+            </div>
+            <div className="flex gap-2 items-center justify-center">
+              <div className="h-6 w-6 md:h-8 md:w-8 rounded-full overflow-hidden mx-2">
+                <img
+                  src={`https://flagsapi.com/${
+                    item.to.split(" ")[1]
+                  }/flat/64.png`}
+                  className="w-full scale-160 object-cover outline-none "
+                />
+              </div>
+              <p className="text-xl font-bold">{item.to.split(" ")[1]}</p>
+            </div>
+            <div className="flex items-center justify-center">
+              <p className="font-bold">{item.result}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <Footer />
     </div>
   );
