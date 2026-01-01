@@ -282,7 +282,7 @@ const CurrencyConverter = () => {
           <div className="relative w-full flex flex-col md:flex-row gap-2 md:gap-5 ">
             <motion.div
               className="md:w-[50%]"
-              whileTap={{ scale: 0.5 }}
+              // whileTap={{ scale: 0.5 }}
               onClick={() => select1Ref.current?.click()}
             >
               <fieldset className=" w-full flex flex-col md:flex-row items-center md:items-end rounded-2xl p-2 md:py-4 md:px-6 justify-between border-2 hover:border-blue-500">
@@ -329,7 +329,7 @@ const CurrencyConverter = () => {
             </motion.button>
             <motion.div
               className="md:w-[50%]"
-              whileTap={{ scale: 0.5 }}
+              // whileTap={{ scale: 0.5 }}
               onClick={() => select2Ref.current?.click()}
             >
               <fieldset className=" w-full flex flex-col md:flex-row items-center md:items-end rounded-2xl p-2 md:py-4 md:px-6 justify-between border-2 hover:border-blue-500">
