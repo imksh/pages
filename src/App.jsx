@@ -10,6 +10,7 @@ import Paint from "./pages/Paint";
 import SnakeAndLadder from "./pages/SnakeAndLadder";
 import Ludo from './pages/Ludo';
 import Camera from './pages/Camera';
+import CurrencyConverter from './pages/CurrencyConverter';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/paint" element={<Paint />} />
         <Route path="/ludo" element={<Ludo />} />
         <Route path="/camera" element={<Camera />} />
+        <Route path="/currency-converter" element={<CurrencyConverter />} />
       </Routes>
       {/* <Toaster /> */}
     </>

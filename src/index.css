@@ -14,6 +14,11 @@
   );
 }
 
+.gradient-currency{
+    background-image: linear-gradient(to bottom, #175bec, #1063f1, #0a6bf6, #0673fb, #077bff);
+}
+
+
 .colorGradient {
   background-image: linear-gradient(
     to right top,
@@ -68,4 +73,34 @@
 
 .soft{
   filter: brightness(110%) contrast(95%) saturate(105%);
+}
+
+
+
+
+
+
+
+
+/* shape divider */
+
+.custom-shape-divider-bottom-1767276540 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1767276540 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 250px;
+}
+
+.custom-shape-divider-bottom-1767276540 .shape-fill {
+    fill: #FFFFFF;
 }

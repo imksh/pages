@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import infinity from "../assets/animations/infinity.json";
 
+
 const Home = () => {
   const navigate = useNavigate();
 
@@ -47,6 +48,13 @@ const Home = () => {
             className="px-6 py-3 bg-blue-500 text-white rounded-md cursor-pointer"
           >
             Camera
+          </button>
+
+          <button
+            onClick={() => navigate("/currency-converter")}
+            className="px-6 py-3 bg-blue-500 text-white rounded-md cursor-pointer"
+          >
+            Currency Converter
           </button>
          
         </div>
