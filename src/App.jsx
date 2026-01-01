@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import LoveMe from "./pages/LoveMe";
@@ -8,11 +8,16 @@ import PapaMummy from "./private/PapaMummy";
 import KaranGalary from "./pages/KaranGalary";
 import Paint from "./pages/Paint";
 import SnakeAndLadder from "./pages/SnakeAndLadder";
-import Ludo from './pages/Ludo';
-import Camera from './pages/Camera';
-import CurrencyConverter from './pages/CurrencyConverter';
+import Ludo from "./pages/Ludo";
+import Camera from "./pages/Camera";
+import CurrencyConverter from "./pages/CurrencyConverter";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const App = () => {
+  useEffect(() => {
+    AOS.init({ duration: 800, easing: "ease-in-out",  mirror: true });
+  }, []);
   return (
     <>
       <Routes>

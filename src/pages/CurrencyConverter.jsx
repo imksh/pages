@@ -6,6 +6,8 @@ import countryData from "../assets/data/countryData.json";
 import axios from "axios";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoCloseSharp } from "react-icons/io5";
 import {
   LineChart,
   Line,
@@ -25,6 +27,13 @@ const CurrencyConverter = () => {
   const [previous, setPrevious] = useState([]);
   const [history, setHistory] = useState([]);
   const [recent, setRecent] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const timer = useRef(null);
+  const searchRef = useRef(null);
+  const heroRef = useRef(null);
+  const recentRef = useRef(null);
+  const historyRef = useRef(null);
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("currencyConverter"));
@@ -37,14 +46,18 @@ const CurrencyConverter = () => {
     getHistory();
   }, [from, to]);
 
-  const timer = useRef(null);
+  const scroll = (item) => {
+    item.current?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
     if (timer.current) clearTimeout(timer.current);
 
     timer.current = setTimeout(() => {
       let updated = [{ from, to, result }, ...recent];
-      updated = updated.slice(0, 10);
+      updated = updated.slice(0, 6);
       setRecent(updated);
       localStorage.setItem("currencyConverter", JSON.stringify(updated));
     }, 5000);
@@ -121,16 +134,123 @@ const CurrencyConverter = () => {
     setFrom(to);
   };
   return (
-    <div className="w-full">
-      <Header heading="TrueRate" />
-      <div className="hero relative  min-h-[90dvh] gradient-currency">
-        <div className="text-white flex flex-col items-center pt-16 md:pt-32 gap-4 mb-8 md:mb-0">
-          <h1 className="text-2xl md:text-6xl font-bold">Currency Converter</h1>
-          <p className="px-4 text-center">
-            Check live foreign currency exchange rates
-          </p>
+    <div className="w-full overflow-x-hidden" onClick={() => setShow(false)}>
+      <div
+        className="fixed top-0 left-0 w-full z-99 bg-blue-500 text-white flex flex-col px-4 md:px-16 min-h-[10dvh] justify-center"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex  justify-between  items-center h-[10dvh]">
+          <div className="flex items-center gap-2">
+            <Lottie
+              animationData={infinity}
+              loop
+              autoplay
+              className="w-10 h-10 md:w-12 md:h-12"
+            />
+            <h2 className="text-xl md:text-2xl font-bold ">TrueRate</h2>
+          </div>
+
+          <div className="hidden md:flex list-none gap-3 items-center  my-auto">
+            <button onClick={() => scroll(heroRef)} className="cursor-pointer">
+              Home
+            </button>
+            <button
+              onClick={() => scroll(recentRef)}
+              className="cursor-pointer"
+            >
+              Recent
+            </button>
+            <button
+              onClick={() => scroll(historyRef)}
+              className="cursor-pointer"
+            >
+              Trends
+            </button>
+            <button
+              onClick={() => scroll(searchRef)}
+              className="cursor-pointer"
+            >
+              History
+            </button>
+          </div>
+          <div className="flex md:hidden">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setShow(!show);
+              }}
+            >
+              {show ? (
+                <IoCloseSharp size={30} />
+              ) : (
+                <GiHamburgerMenu size={24} />
+              )}
+            </button>
+          </div>
         </div>
-        <div className="w-[85%] md:w-[70%] absolute md:top-[50%] left-[50%] -translate-x-[50%] mx-auto rounded-2xl shadow-2xl bg-white p-4 z-10">
+        {show && (
+          <div className="flex  md:hidden flex-col items-baseline gap-3 mx-4 mb-4">
+            <button
+              onClick={() => {
+                scroll(heroRef);
+                setShow(false);
+              }}
+              className="cursor-pointer"
+            >
+              Home
+            </button>
+            <button
+              onClick={() => {
+                scroll(recentRef);
+                setShow(false);
+              }}
+              className="cursor-pointer"
+            >
+              Recent
+            </button>
+            <button
+              onClick={() => {
+                scroll(historyRef);
+                setShow(false);
+              }}
+              className="cursor-pointer"
+            >
+              Trends
+            </button>
+            <button
+              onClick={() => {
+                scroll(searchRef);
+                setShow(false);
+              }}
+              className="cursor-pointer"
+            >
+              History
+            </button>
+          </div>
+        )}
+      </div>
+
+      <div
+        className="hero relative  min-h-[90dvh] gradient-currency"
+        ref={heroRef}
+      >
+        <div className="text-white flex flex-col items-center pt-24 md:pt-32 gap-4 mb-8 md:mb-0">
+          <div
+            data-aos="fade-down"
+            className="flex flex-col gap-4 justify-center items-center"
+          >
+            <h1 className="text-2xl md:text-6xl font-bold">
+              Currency Converter
+            </h1>
+            <p className="px-4 text-center">
+              Check live foreign currency exchange rates
+            </p>
+          </div>
+        </div>
+        <div
+          className="w-[85%] md:w-[70%] absolute md:top-[50%] left-[50%] -translate-x-[50%] mx-auto rounded-2xl shadow-2xl bg-white p-4 z-10"
+          data-aos="zoom-in"
+        >
           <div className="relative w-full flex flex-col md:flex-row gap-2 md:gap-5 ">
             <div className="md:w-[50%]">
               <fieldset className=" w-full flex flex-col md:flex-row items-center md:items-end rounded-2xl p-2 md:py-4 md:px-6 justify-between border-2 hover:border-blue-500">
@@ -245,7 +365,11 @@ const CurrencyConverter = () => {
         </div>
       </div>
 
-      <div className="flex flex-col w-[95%] md:w-[70%] mx-auto rounded-2xl overflow-hidden">
+      <div
+        className="flex flex-col w-[95%] md:w-[70%] mx-auto rounded-2xl overflow-hidden"
+        data-aos="fade-up-right"
+        ref={recentRef}
+      >
         <h1 className="text-2xl md:text-4xl font-bold text-blue-500 mx-auto mt-16 mb-8">
           Last few days
         </h1>
@@ -307,7 +431,11 @@ const CurrencyConverter = () => {
         )}
       </div>
 
-      <div className="relative flex flex-col justify-center items-center my-16 p-4">
+      <div
+        className="relative flex flex-col justify-center items-center my-16 p-4"
+        data-aos="fade-up-left"
+        ref={historyRef}
+      >
         <p className="text-2xl md:text-4xl text-blue-500 my-16 text-center font-bold">
           Historical Trends in last one year
         </p>
@@ -348,7 +476,11 @@ const CurrencyConverter = () => {
         </LineChart>
       </div>
 
-      <div className="flex flex-col w-[95%] md:w-[70%] mx-auto rounded-2xl overflow-hidden">
+      <div
+        className="flex flex-col w-[95%] md:w-[70%] mx-auto rounded-2xl overflow-hidden"
+        data-aos="fade-up"
+        ref={searchRef}
+      >
         <h1 className="text-2xl md:text-4xl font-bold text-blue-500 mx-auto mt-16 mb-8">
           Recent Searches
         </h1>
