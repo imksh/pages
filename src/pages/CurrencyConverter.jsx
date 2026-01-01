@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
+import { motion, AnimatePresence } from "motion/react";
 import {
   LineChart,
   Line,
@@ -34,6 +35,8 @@ const CurrencyConverter = () => {
   const heroRef = useRef(null);
   const recentRef = useRef(null);
   const historyRef = useRef(null);
+  const select1Ref = useRef(null);
+  const select2Ref = useRef(null);
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("currencyConverter"));
@@ -140,41 +143,57 @@ const CurrencyConverter = () => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex  justify-between  items-center h-[10dvh]">
-          <div className="flex items-center gap-2">
+          <motion.button
+            whileTap={{ scale: 0.5 }}
+            onClick={() => scroll(heroRef)}
+            className="flex items-center gap-2"
+          >
             <Lottie
               animationData={infinity}
               loop
               autoplay
               className="w-10 h-10 md:w-12 md:h-12"
             />
-            <h2 className="text-xl md:text-2xl font-bold ">TrueRate</h2>
-          </div>
+            <button className="text-xl md:text-2xl font-bold ">TrueRate</button>
+          </motion.button>
 
           <div className="hidden md:flex list-none gap-3 items-center  my-auto">
-            <button onClick={() => scroll(heroRef)} className="cursor-pointer">
+            <motion.button
+              whileTap={{ scale: 0.1 }}
+              transition={{ duration: 0.1 }}
+              onClick={() => scroll(heroRef)}
+              className="cursor-pointer"
+            >
               Home
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.1 }}
+              transition={{ duration: 0.1 }}
               onClick={() => scroll(recentRef)}
               className="cursor-pointer"
             >
               Recent
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.1 }}
+              transition={{ duration: 0.1 }}
               onClick={() => scroll(historyRef)}
               className="cursor-pointer"
             >
               Trends
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.1 }}
+              transition={{ duration: 0.1 }}
               onClick={() => scroll(searchRef)}
               className="cursor-pointer"
             >
               History
-            </button>
+            </motion.button>
           </div>
           <div className="flex md:hidden">
-            <button
+            <motion.button
+              whileTap={{ scale: 0.1 }}
               onClick={(e) => {
                 e.stopPropagation();
                 setShow(!show);
@@ -185,56 +204,65 @@ const CurrencyConverter = () => {
               ) : (
                 <GiHamburgerMenu size={24} />
               )}
-            </button>
+            </motion.button>
           </div>
         </div>
-        {show && (
-          <div className="flex  md:hidden flex-col items-baseline gap-3 mx-4 mb-4">
-            <button
-              onClick={() => {
-                scroll(heroRef);
-                setShow(false);
-              }}
-              className="cursor-pointer"
+        <AnimatePresence>
+          {show && (
+            <motion.div
+              className="flex  md:hidden flex-col items-baseline gap-3 mx-4 mb-4"
+              exit={{ opacity: 0, scale: 0.8 }}
             >
-              Home
-            </button>
-            <button
-              onClick={() => {
-                scroll(recentRef);
-                setShow(false);
-              }}
-              className="cursor-pointer"
-            >
-              Recent
-            </button>
-            <button
-              onClick={() => {
-                scroll(historyRef);
-                setShow(false);
-              }}
-              className="cursor-pointer"
-            >
-              Trends
-            </button>
-            <button
-              onClick={() => {
-                scroll(searchRef);
-                setShow(false);
-              }}
-              className="cursor-pointer"
-            >
-              History
-            </button>
-          </div>
-        )}
+              <motion.button
+                whileTap={{ scale: 0.1 }}
+                onClick={() => {
+                  scroll(heroRef);
+                  setShow(false);
+                }}
+                className="cursor-pointer w-full flex justify-baseline"
+              >
+                Home
+              </motion.button>
+              <motion.button
+                whileTap={{ scale: 0.1 }}
+                onClick={() => {
+                  scroll(recentRef);
+                  setShow(false);
+                }}
+                className="cursor-pointer w-full flex justify-baseline"
+              >
+                Recent
+              </motion.button>
+              <motion.button
+                whileTap={{ scale: 0.1 }}
+                onClick={() => {
+                  scroll(historyRef);
+                  setShow(false);
+                }}
+                className="cursor-pointer w-full flex justify-baseline"
+              >
+                Trends
+              </motion.button>
+              <motion.button
+                whileTap={{ scale: 0.1 }}
+                onClick={() => {
+                  scroll(searchRef);
+                  setShow(false);
+                }}
+                className="cursor-pointer w-full flex justify-baseline"
+              >
+                History
+              </motion.button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div
         className="hero relative  min-h-[90dvh] gradient-currency"
         ref={heroRef}
       >
-        <div className="text-white flex flex-col items-center pt-24 md:pt-32 gap-4 mb-8 md:mb-0">
+        <div className="text-white flex flex-col items-center pt-32 pb-8 gap-4 mb-8 md:mb-0">
           <div
             data-aos="fade-down"
             className="flex flex-col gap-4 justify-center items-center"
@@ -252,7 +280,11 @@ const CurrencyConverter = () => {
           data-aos="zoom-in"
         >
           <div className="relative w-full flex flex-col md:flex-row gap-2 md:gap-5 ">
-            <div className="md:w-[50%]">
+            <motion.div
+              className="md:w-[50%]"
+              whileTap={{ scale: 0.5 }}
+              onClick={() => select1Ref.current?.click()}
+            >
               <fieldset className=" w-full flex flex-col md:flex-row items-center md:items-end rounded-2xl p-2 md:py-4 md:px-6 justify-between border-2 hover:border-blue-500">
                 <legend>From</legend>
                 <p className="my-auto">{from.split(" ")[0]} 1</p>
@@ -270,6 +302,7 @@ const CurrencyConverter = () => {
                     id="from"
                     className="ml-auto  my-auto p-2 rounded-lg outline-none w-40 md:w-auto overflow-hidden max-w-36"
                     value={from}
+                    ref={select1Ref}
                     onChange={(e) => {
                       setFrom(e.target.value);
                     }}
@@ -285,14 +318,20 @@ const CurrencyConverter = () => {
                   </select>
                 </div>
               </fieldset>
-            </div>
-            <button
-              className="absolute top-[52%] md:top-[55%] left-[50%] -translate-x-[50%] -translate-y-[50%]  bg-white border rounded-full cursor-pointer"
+            </motion.div>
+            <motion.button
+              className="absolute top-[52%] md:top-[55%] left-[50%] -translate-x-[50%] -translate-y-[50%]  bg-white border rounded-full cursor-pointer z-10"
               onClick={swap}
+              whileHover={{ rotate: 360 }}
+              whileTap={{ rotate: 360, scale: 0.5 }}
             >
               <CgArrowsExchange className="w-10 h-10 rotate-90 md:rotate-0" />
-            </button>
-            <div className="md:w-[50%]">
+            </motion.button>
+            <motion.div
+              className="md:w-[50%]"
+              whileTap={{ scale: 0.5 }}
+              onClick={() => select2Ref.current?.click()}
+            >
               <fieldset className=" w-full flex flex-col md:flex-row items-center md:items-end rounded-2xl p-2 md:py-4 md:px-6 justify-between border-2 hover:border-blue-500">
                 <legend>To</legend>
                 <p className="my-auto">
@@ -308,6 +347,7 @@ const CurrencyConverter = () => {
                     />
                   </div>
                   <select
+                    ref={select2Ref}
                     name="to"
                     id="to"
                     className="ml-auto  my-auto p-2 rounded-lg outline-none w-40 md:w-auto overflow-hidden  max-w-36"
@@ -327,21 +367,24 @@ const CurrencyConverter = () => {
                   </select>
                 </div>
               </fieldset>
-            </div>
+            </motion.div>
           </div>
 
           <div className="flex flex-col md:flex-row items-center justify-between md:px-4 gap-2 md:gap-8 mt-6 mb-2 md:my-6">
-            <div className="relative flex items-center w-full mx-auto">
+            <motion.div
+              className="relative flex items-center w-fit mx-auto"
+              whileTap={{ scale: 0.5 }}
+            >
               <p className="absolute left-3 text-blue-500">
                 {from.split(" ")[0]}
               </p>
               <input
                 type="number"
-                className="border py-3 pl-12 pr-2 md:pl-14 w-full md:w-[50%] rounded-lg outline-blue-500"
+                className="border py-3 pl-12 pr-2 md:pl-14 w-full rounded-lg outline-blue-500"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
               />
-            </div>
+            </motion.div>
             <div className="md:text-xl font-bold text-blue-500 md:min-w-[50%] flex justify-end items-center grow">
               <p>{`${input || 0} ${from.split(" ")[0]} = ${(
                 result * input
@@ -433,7 +476,7 @@ const CurrencyConverter = () => {
 
       <div
         className="relative flex flex-col justify-center items-center my-16 p-4"
-        data-aos="fade-up-left"
+        data-aos="fade-up-right"
         ref={historyRef}
       >
         <p className="text-2xl md:text-4xl text-blue-500 my-16 text-center font-bold">
