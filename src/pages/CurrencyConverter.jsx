@@ -138,125 +138,19 @@ const CurrencyConverter = () => {
   };
   return (
     <div className="w-full overflow-x-hidden" onClick={() => setShow(false)}>
-      <div
-        className="fixed top-0 left-0 w-full z-99 bg-blue-500 text-white flex flex-col px-4 md:px-16 min-h-[10dvh] justify-center"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex  justify-between  items-center h-[10dvh]">
-          <motion.button
-            whileTap={{ scale: 0.5 }}
-            onClick={() => scroll(heroRef)}
-            className="flex items-center gap-2"
-          >
-            <Lottie
-              animationData={infinity}
-              loop
-              autoplay
-              className="w-10 h-10 md:w-12 md:h-12"
-            />
-            <button className="text-xl md:text-2xl font-bold ">TrueRate</button>
-          </motion.button>
-
-          <div className="hidden md:flex list-none gap-3 items-center  my-auto">
-            <motion.button
-              whileTap={{ scale: 0.1 }}
-              transition={{ duration: 0.1 }}
-              onClick={() => scroll(heroRef)}
-              className="cursor-pointer"
-            >
-              Home
-            </motion.button>
-            <motion.button
-              whileTap={{ scale: 0.1 }}
-              transition={{ duration: 0.1 }}
-              onClick={() => scroll(recentRef)}
-              className="cursor-pointer"
-            >
-              Recent
-            </motion.button>
-            <motion.button
-              whileTap={{ scale: 0.1 }}
-              transition={{ duration: 0.1 }}
-              onClick={() => scroll(historyRef)}
-              className="cursor-pointer"
-            >
-              Trends
-            </motion.button>
-            <motion.button
-              whileTap={{ scale: 0.1 }}
-              transition={{ duration: 0.1 }}
-              onClick={() => scroll(searchRef)}
-              className="cursor-pointer"
-            >
-              History
-            </motion.button>
-          </div>
-          <div className="flex md:hidden">
-            <motion.button
-              whileTap={{ scale: 0.1 }}
-              onClick={(e) => {
-                e.stopPropagation();
-                setShow(!show);
-              }}
-            >
-              {show ? (
-                <IoCloseSharp size={30} />
-              ) : (
-                <GiHamburgerMenu size={24} />
-              )}
-            </motion.button>
-          </div>
-        </div>
-        <AnimatePresence>
-          {show && (
-            <motion.div
-              className="flex  md:hidden flex-col items-baseline gap-3 mx-4 mb-4"
-              exit={{ opacity: 0, scale: 0.8 }}
-            >
-              <motion.button
-                whileTap={{ scale: 0.1 }}
-                onClick={() => {
-                  scroll(heroRef);
-                  setShow(false);
-                }}
-                className="cursor-pointer w-full flex justify-baseline"
-              >
-                Home
-              </motion.button>
-              <motion.button
-                whileTap={{ scale: 0.1 }}
-                onClick={() => {
-                  scroll(recentRef);
-                  setShow(false);
-                }}
-                className="cursor-pointer w-full flex justify-baseline"
-              >
-                Recent
-              </motion.button>
-              <motion.button
-                whileTap={{ scale: 0.1 }}
-                onClick={() => {
-                  scroll(historyRef);
-                  setShow(false);
-                }}
-                className="cursor-pointer w-full flex justify-baseline"
-              >
-                Trends
-              </motion.button>
-              <motion.button
-                whileTap={{ scale: 0.1 }}
-                onClick={() => {
-                  scroll(searchRef);
-                  setShow(false);
-                }}
-                className="cursor-pointer w-full flex justify-baseline"
-              >
-                History
-              </motion.button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+      <Header
+        showInfinity={true}
+        heading="TrueRate"
+        name1="Home"
+        name2="Recent"
+        name3="Trends"
+        name4="History"
+        fun1={() => scroll(heroRef)}
+        fun2={() => scroll(recentRef)}
+        fun3={() => scroll(historyRef)}
+        fun4={() => scroll(searchRef)}
+        color="bg-blue-500"
+      />
 
       <div
         className="hero relative  min-h-[90dvh] gradient-currency"
@@ -441,11 +335,11 @@ const CurrencyConverter = () => {
           </div>
         </div>
         {loading ? (
-          <div className="flex justify-center items-center bg-blue-100 p-3 min-h-100 w-full ">
+          <div className="flex justify-center items-center bg-blue-100 p-3 min-h-60 w-full ">
             <Lottie animationData={infinity} loop className="w-20 h-20" />
           </div>
         ) : previous.length <= 0 ? (
-          <div className="flex flex-col gap-4 justify-center items-center bg-blue-100 p-3 min-h-100 w-full ">
+          <div className="flex flex-col gap-4 justify-center items-center bg-blue-100 p-3 min-h-60 w-full ">
             <Lottie animationData={infinity} loop className="w-20 h-20" />
             <p className="font-bold text-blue-500">Not Available</p>
           </div>
@@ -475,7 +369,7 @@ const CurrencyConverter = () => {
       </div>
 
       <div
-        className="relative flex flex-col justify-center items-center my-16 p-4"
+        className="relative flex flex-col justify-center items-center my-16 p-4 "
         data-aos="fade-up-right"
         ref={historyRef}
       >
@@ -497,6 +391,8 @@ const CurrencyConverter = () => {
           }}
           data={history}
           margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
+          className="-translate-x-[4%]"
+
         >
           <XAxis dataKey="date" />
           <YAxis />
@@ -549,7 +445,7 @@ const CurrencyConverter = () => {
                   className="w-full scale-160 object-cover outline-none "
                 />
               </div>
-              <p className="text-xl font-bold">{item.from.split(" ")[1]}</p>
+              <p className="font-bold">{item.from.split(" ")[1]}</p>
             </div>
             <div className="flex gap-2 items-center justify-center">
               <div className="h-6 w-6 md:h-8 md:w-8 rounded-full overflow-hidden mx-2">
@@ -560,7 +456,7 @@ const CurrencyConverter = () => {
                   className="w-full scale-160 object-cover outline-none "
                 />
               </div>
-              <p className="text-xl font-bold">{item.to.split(" ")[1]}</p>
+              <p className="font-bold">{item.to.split(" ")[1]}</p>
             </div>
             <div className="flex items-center justify-center">
               <p className="font-bold">{item.result}</p>
