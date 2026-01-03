@@ -13,6 +13,14 @@ const data = [
   },
   {
     key: "2",
+    img1: "/images/wonders/eiffel.webp",
+    img2: "/images/wonders/eiffelsm.png",
+    title: "Eiffel Tower",
+    country: "France",
+    desc: "Built in 1889 for the Paris World’s Fair, the Eiffel Tower was once criticized — now it’s one of the most famous structures in the world. Made of iron and standing about 324 meters tall, it was the tallest man-made structure for decades.",
+  },
+  {
+    key: "3",
     img1: "/images/wonders/wall.jpg",
     img2: "/images/wonders/wallsm.png",
     title: "Great Wall of China",
@@ -20,7 +28,7 @@ const data = [
     desc: "Stretches thousands of kilometers across deserts, hills, and mountains. Built over many dynasties to defend against invasions. Parts are ruined, but huge sections still stand strong.",
   },
   {
-    key: "3",
+    key: "4",
     img1: "/images/wonders/pyramid.png",
     img2: "/images/wonders/pyramidsm.png",
     title: "Pyramids of Giza",
@@ -35,6 +43,7 @@ const data = [
     country: "Peru",
     desc: "Incan city built high in the Andes, overlooking deep valleys. Features terraces, temples, and precise stonework without mortar. Abandoned long ago and rediscovered in 1911.",
   },
+  
   {
     key: "5",
     img1: "/images/wonders/petra1.jpg",
@@ -68,6 +77,7 @@ const data = [
     desc: "Major Mayan city known for the pyramid El Castillo. During equinoxes, shadows create the illusion of a serpent sliding down the steps. Shows the Mayans’ advanced math, astronomy, and architecture.",
   },
 ];
+
 const Wonders = () => {
   const [index, setIndex] = useState(0);
   const [key, setKey] = useState(0);
@@ -126,7 +136,7 @@ const Wonders = () => {
           <img
             src={data[index].img1}
             alt=""
-            className="absolute top-0 left-0 w-full h-full object-cover object-center"
+            className="absolute top-0 left-0 w-full h-full object-cover object-center opacity-70"
           />
           <div
             key={key}
@@ -135,6 +145,8 @@ const Wonders = () => {
             <motion.div
             //   key={data[index].key}
               whileTap={{ scale: 0.1 }}
+              initial={{scale:1.1}}
+              animate={{scale:1}}
               transition={{ duration: 1 }}
               style={{ backgroundImage: `url(${data[index].img2})` }}
               className={`slice bg-[url()] bg-cover bg-position-[5%,0%] h-80 w-12 md:h-100 md:w-16 rounded-2xl shadow-2xl`}
@@ -158,6 +170,8 @@ const Wonders = () => {
             <motion.div
             //   key={data[index].key}
               whileTap={{ scale: 0.1 }}
+              initial={{scale:1.1}}
+              animate={{scale:1}}
               transition={{ duration: 1 }}
               style={{ backgroundImage: `url(${data[index].img2})` }}
               className={`slice bg-[url()] bg-cover bg-position-[50%_0%] h-80 w-12 md:h-100 md:w-16 rounded-2xl shadow-2xl`}

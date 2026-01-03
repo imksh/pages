@@ -7,14 +7,17 @@ import Header from "../components/Header";
 import { motion } from "motion/react";
 import Footer from "../components/Footer";
 import { FaSearch } from "react-icons/fa";
+import { IoSearchOutline } from "react-icons/io5";
 
 const Home = () => {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState(null);
   const [input, setInput] = useState("");
+  const [input2, setInput2] = useState("");
   const timerRef = useRef(null);
   const [searchData, setSearchData] = useState(data);
+  const [mainData, setMainData] = useState(data);
   useEffect(() => {
     const fun = () => {
       const updated = data.filter((item) =>
@@ -24,6 +27,16 @@ const Home = () => {
     };
     fun();
   }, [input]);
+
+  useEffect(() => {
+    const fun = () => {
+      const updated = data.filter((item) =>
+        item.title.toLowerCase().includes(input2.toLowerCase())
+      );
+      setMainData(updated);
+    };
+    fun();
+  }, [input2]);
 
   useEffect(() => {
     const fun = async () => {
@@ -47,20 +60,20 @@ const Home = () => {
       <div className=" w-screen flex items-center justify-center pt-[10vh] h-screen overflow-hidden">
         <div className="w-[20%] hidden md:block   h-full py-4  shadow-2xl">
           <div className="relative flex justify-center items-center">
-            <FaSearch className="absolute left-10 " />
+            <IoSearchOutline className="absolute left-6 " />
             <input
               type="text"
               placeholder="Search"
-              className="border rounded-2xl w-[80%] p-2 pl-8 outline-blue-500 active:border-0"
+              className="border rounded-2xl w-[90%] p-2 pl-8 outline-blue-500 active:border-0"
               value={input}
               onChange={(e) => setInput(e.target.value)}
             />
           </div>
-          <div className="flex flex-col items-baseline p-4 gap-2">
+          <div className="flex flex-col items-baseline px-0 py-4 lg:px-2 gap-2">
             {searchData.map((item, idx) => (
               <button
                 key={idx}
-                className="w-full flex items-baseline p-2 pl-4 hover:bg-blue-100 cursor-pointer rounded-lg font-bold"
+                className="w-full flex items-baseline text-left p-2 pl-4 hover:bg-blue-100 cursor-pointer rounded-lg font-bold"
                 onClick={()=>navigate(item.link)}
               >
                 {item.title}
@@ -90,10 +103,20 @@ const Home = () => {
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 items-center p-4">
-            <p className="col-span-2 md:col-span-4 justify-center flex  items-center text-2xl font-bold text-blue-500">
+            <div className="col-span-2 md:col-span-4 md:hidden relative flex justify-center items-center">
+            <IoSearchOutline className="absolute left-3 " />
+            <input
+              type="text"
+              placeholder="Search"
+              className="border rounded-2xl w-full p-3 pl-8 outline-blue-500 active:border-0"
+              value={input2}
+              onChange={(e) => setInput2(e.target.value)}
+            />
+          </div>
+            <p className="col-span-2 md:col-span-4 justify-center hidden md:flex  items-center text-2xl font-bold text-blue-500">
               All Apps
             </p>
-            {data.map((item, key) => (
+            {mainData.map((item, key) => (
               <motion.button
                 whileTap={{ scale: 0.5 }}
                 key={key}
