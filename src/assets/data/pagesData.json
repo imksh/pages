@@ -1,0 +1,37 @@
+[
+  {
+    "title": "TrueRate",
+    "link": "/currency-converter",
+    "img": "/images/home/trueRate.png"
+  },
+  {
+    "title": "Wonders of World",
+    "link": "/wonders",
+    "img": "/images/home/wonders.png"
+  },
+  {
+    "title": "Snake & Ladder",
+    "link": "/snake-and-ladder",
+    "img": "/images/home/snakeLadder.png"
+  },
+  {
+    "title": "Galary",
+    "link": "/galary",
+    "img": "/images/home/galary.png"
+  },
+  {
+    "title": "Photo Booth",
+    "link": "/camera",
+    "img": "/images/home/photoBooth.png"
+  },
+  {
+    "title": "Love Me?",
+    "link": "/loveMe",
+    "img": "/images/home/loveMe.png"
+  },
+  {
+    "title": "Paint",
+    "link": "/paint",
+    "img": "/images/home/paint.jpeg"
+  }
+]

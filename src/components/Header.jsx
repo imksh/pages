@@ -30,7 +30,7 @@ const Header = ({
         <motion.button
           whileTap={{ scale: 0.5 }}
           onClick={fun1 ? fun1 : null}
-          className="flex items-center gap-2 cursor-pointer"
+          className="flex items-center gap-2.5 cursor-pointer"
         >
           {showInfinity && (
             <Lottie
