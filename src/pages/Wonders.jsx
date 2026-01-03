@@ -93,6 +93,7 @@ const Wonders = () => {
 
   useEffect(() => {
     const handle = (e) => {
+      
       if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
         setIndex((prev) => (prev - 1 < 0 ? data.length - 1 : prev - 1));
         setKey((k) => k + 1);
@@ -212,7 +213,7 @@ const Wonders = () => {
               drag
               dragConstraints={{
                 left: size.width > 700 ? -300 : -200,
-                right: size.width - (size.width > 700 ? 500 : 250),
+                right: size.width > 700 ? size.width - 500 : 50,
                 top: -200,
                 bottom: 150,
               }}
