@@ -18,14 +18,6 @@ const LoveMe = () => {
   const heartRef = useRef();
   const acceptedRef = useRef();
   const celebrateRef = useRef();
-  const timerRef = useRef();
-  // useEffect(() => {
-  //   const fun = async () => {
-  //     timerRef.current = await
-  //   };
-  //   fun();
-  //   return () => clearTimeout(timerRef.current);
-  // }, [showMsg]);
 
   const handleNo = () => {
     let x = Math.random() * (width - 200);
@@ -131,7 +123,7 @@ const LoveMe = () => {
           )}
 
           {showMsg && (
-            <div className="absolute bottom-10 text-2xl flex items-center bg-black/50 p-2 rounded-2xl z-10">
+            <div className="absolute bottom-10 text-2xl flex items-center bg-black/50 py-3 px-5 rounded-2xl z-10">
               🙏🏻 Think again
             </div>
           )}
