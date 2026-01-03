@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import useWindowSize from "../hooks/useWindowSize";
 
 const data = [
   {
@@ -14,7 +15,7 @@ const data = [
   {
     key: "2",
     img1: "/images/wonders/eiffel.webp",
-    img2: "/images/wonders/eiffelsm.png",
+    img2: "/images/wonders/eiffel.webp",
     title: "Eiffel Tower",
     country: "France",
     desc: "Built in 1889 for the Paris World’s Fair, the Eiffel Tower was once criticized — now it’s one of the most famous structures in the world. Made of iron and standing about 324 meters tall, it was the tallest man-made structure for decades.",
@@ -43,7 +44,7 @@ const data = [
     country: "Peru",
     desc: "Incan city built high in the Andes, overlooking deep valleys. Features terraces, temples, and precise stonework without mortar. Abandoned long ago and rediscovered in 1911.",
   },
-  
+
   {
     key: "5",
     img1: "/images/wonders/petra1.jpg",
@@ -82,6 +83,8 @@ const Wonders = () => {
   const [index, setIndex] = useState(0);
   const [key, setKey] = useState(0);
   const [show, setShow] = useState(true);
+  const size = useWindowSize();
+
   useEffect(() => {
     setTimeout(() => {
       setShow(false);
@@ -90,13 +93,13 @@ const Wonders = () => {
 
   useEffect(() => {
     const handle = (e) => {
-      if (e.key === "ArrowLeft") {
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
         setIndex((prev) => (prev - 1 < 0 ? data.length - 1 : prev - 1));
-        setKey(k => k + 1);
+        setKey((k) => k + 1);
       }
-      if (e.key === "ArrowRight") {
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
         setIndex((prev) => (prev + 1 >= data.length ? 0 : prev + 1));
-        setKey(k => k + 1);
+        setKey((k) => k + 1);
       }
     };
 
@@ -140,19 +143,33 @@ const Wonders = () => {
           />
           <div
             key={key}
-            className="container flex gap-4 md:gap-6 absolute top-[32%] md:top-[50%] md:-translate-y-[50%]  md:left-[4%] w-full justify-center md:w-fit"
+            className="container flex gap-4 md:gap-5 absolute top-[32%] md:top-[50%] md:-translate-y-[50%]  md:left-[4%] w-full justify-center md:w-fit"
           >
             <motion.div
-            //   key={data[index].key}
+              //   key={data[index].key}
+              drag
+              dragConstraints={{
+                left: 0,
+                right: size.width - (size.width > 700 ? 200 : 50),
+                top: -200,
+                bottom: 150,
+              }}
               whileTap={{ scale: 0.1 }}
-              initial={{scale:1.1}}
-              animate={{scale:1}}
+              initial={{ scale: 1.1 }}
+              animate={{ scale: 1 }}
               transition={{ duration: 1 }}
               style={{ backgroundImage: `url(${data[index].img2})` }}
               className={`slice bg-[url()] bg-cover bg-position-[5%,0%] h-80 w-12 md:h-100 md:w-16 rounded-2xl shadow-2xl`}
             />
             <motion.div
-            //   key={data[index].key}
+              //   key={data[index].key}
+              drag
+              dragConstraints={{
+                left: size.width > 700 ? -100 : -50,
+                right: size.width - (size.width > 700 ? 250 : 120),
+                top: -200,
+                bottom: 150,
+              }}
               whileTap={{ scale: 0.1 }}
               animate={{ scaleY: 1.2 }}
               transition={{ duration: 1 }}
@@ -160,7 +177,14 @@ const Wonders = () => {
               className={`slice bg-[url()] bg-cover bg-position-[20%_0%] h-80 w-12 md:h-100 md:w-16 rounded-2xl shadow-2xl`}
             />
             <motion.div
-            //   key={data[index].key}
+              //   key={data[index].key}
+              drag
+              dragConstraints={{
+                left: size.width > 700 ? -200 : -100,
+                right: size.width - (size.width > 700 ? 300 : 150),
+                top: -200,
+                bottom: 150,
+              }}
               whileTap={{ scale: 0.1 }}
               animate={{ scaleY: 1.3 }}
               transition={{ duration: 1 }}
@@ -168,16 +192,30 @@ const Wonders = () => {
               className={`slice bg-[url()] bg-cover bg-position-[30%_0%] h-80 w-12 md:h-100 md:w-16 rounded-2xl shadow-2xl`}
             />
             <motion.div
-            //   key={data[index].key}
+              //   key={data[index].key}
+              drag
+              dragConstraints={{
+                left: size.width > 700 ? -250 : -150,
+                right: size.width - (size.width > 700 ? 400 : 200),
+                top: -200,
+                bottom: 150,
+              }}
               whileTap={{ scale: 0.1 }}
-              initial={{scale:1.1}}
-              animate={{scale:1}}
+              initial={{ scale: 1.1 }}
+              animate={{ scale: 1 }}
               transition={{ duration: 1 }}
               style={{ backgroundImage: `url(${data[index].img2})` }}
               className={`slice bg-[url()] bg-cover bg-position-[50%_0%] h-80 w-12 md:h-100 md:w-16 rounded-2xl shadow-2xl`}
             />
             <motion.div
-            //   key={data[index].key}
+              //   key={data[index].key}
+              drag
+              dragConstraints={{
+                left: size.width > 700 ? -300 : -200,
+                right: size.width - (size.width > 700 ? 500 : 250),
+                top: -200,
+                bottom: 150,
+              }}
               whileTap={{ scale: 0.1 }}
               animate={{ scaleY: 1.15 }}
               transition={{ duration: 1 }}
@@ -185,7 +223,14 @@ const Wonders = () => {
               className={`slice bg-[url()] bg-cover bg-position-[60%_0%] h-80 w-12 md:h-100 md:w-16 rounded-2xl shadow-2xl`}
             />
             <motion.div
-            //   key={data[index].key}
+              //   key={data[index].key}
+              drag
+              dragConstraints={{
+                left: size.width > 700 ? -400 : -280,
+                right: size.width > 700 ? size.width - 600 : 0,
+                top: -200,
+                bottom: 150,
+              }}
               whileTap={{ scale: 0.1 }}
               animate={{ scaleY: 1.25 }}
               transition={{ duration: 1 }}
@@ -196,6 +241,13 @@ const Wonders = () => {
 
           <motion.div
             key={key + "500"}
+            drag
+            dragConstraints={{
+              left: size.width > 700 ? -800 : -100,
+              right: size.width > 700 ? 300 : 100,
+              top: size.width > 700 ? -250 : 0,
+              bottom: size.width > 700 ? 250 : size.height - 200,
+            }}
             initial={{ x: 550 }}
             animate={{ x: 0 }}
             transition={{ duration: 0.3 }}
@@ -221,14 +273,14 @@ const Wonders = () => {
             </motion.p>
           </motion.div>
 
-          <div className="absolute bottom-10 left-[50%] -translate-x-[50%] flex gap-5">
+          <div className="absolute bottom-10 left-[50%] -translate-x-[50%] flex gap-5 z-20">
             <motion.button
               whileTap={{ scale: 0.5 }}
               whileHover={{ scale: 1.1 }}
               className="p-2 rounded-full shadow-2xl bg-white cursor-pointer"
               onClick={() => {
                 setIndex((prev) => (prev - 1 < 0 ? data.length - 1 : prev - 1));
-                setKey(k => k + 1);
+                setKey((k) => k + 1);
               }}
             >
               <IoIosArrowBack size={30} />
@@ -239,7 +291,7 @@ const Wonders = () => {
               className="p-2 rounded-full shadow-2xl bg-white cursor-pointer"
               onClick={() => {
                 setIndex((prev) => (prev + 1 >= data.length ? 0 : prev + 1));
-                setKey(k => k + 1);
+                setKey((k) => k + 1);
               }}
             >
               <IoIosArrowForward size={30} />
