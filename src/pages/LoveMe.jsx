@@ -79,7 +79,10 @@ const LoveMe = () => {
           </h1>
           <div className="flex gap-4 md:gap-14 mt-10 min-w-[220px]  md:min-w-[360px] justify-baseline">
             <motion.button
-              whileTap={{ scale: 0.5 }}
+              drag
+              dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+              dragElastic={0.3}
+              whileTap={{ scale: 1 }}
               className="border-2 rounded-lg h-[50px] w-[100px] md:h-[80px] md:w-[150px] bg-pink-400 cursor-pointer relative z-10"
               ref={yesRef}
               onClick={handleYes}
@@ -87,7 +90,10 @@ const LoveMe = () => {
               Yes
             </motion.button>
             <motion.button
-              whileTap={{ scale: 0.5 }}
+              drag
+              dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+              dragElastic={0.2}
+              whileTap={{ scale: 0.8 }}
               whileHover={handleNo}
               className="border-2 cursor-pointer rounded-lg h-[50px] w-[100px] md:h-[80px] bg-pink-400 md:w-[150px] z-20"
               ref={noRef}
@@ -107,24 +113,35 @@ const LoveMe = () => {
               className="hidden cursor-pointer w-full text-2xl my-4"
               ref={acceptedRef}
             >
-              Love You too ❤️
+              Love You too 
             </p>
             <h1 className="text-center md:text-2xl">
               I knew you’d say yes… but I still can’t stop smiling.
             </h1>
-            <Lottie animationData={heart} loop className="w-40 h-40" />
-            <img src="/images/love.png" alt="" className="md:w-48 md:h-48" />
+            <motion.div whileTap={{ scale: 0.5 }}>
+              <Lottie animationData={heart} loop className="w-40 h-40" />
+            </motion.div>
+            <motion.div whileTap={{ scale: 0.5 }} className="z-50">
+              <img src="/images/love.png" alt="" className="md:w-48 md:h-48" />
+            </motion.div>
           </div>
           {show && (
-            <Lottie
-              animationData={Pookie}
-              className="absolute bottom-24 md:bottom-1 left-[50%] scale-120 md:scale-100 -translate-x-[50%] w-100 h-100"
-            />
+            <motion.div
+              drag
+              dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+              dragElastic={0.3}
+              className="absolute bottom-24 md:bottom-1 left-[50%]"
+            >
+              <Lottie
+                animationData={Pookie}
+                className="scale-150 md:scale-100 md:w-100 md:h-100 -translate-x-[50%] "
+              />
+            </motion.div>
           )}
 
           {showMsg && (
             <div className="absolute bottom-10 text-2xl flex items-center bg-black/50 py-3 px-5 rounded-2xl z-10">
-              🙏🏻 Think again
+              Think again
             </div>
           )}
         </div>
