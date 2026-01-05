@@ -30,11 +30,11 @@ const Karan = () => {
 
   return (
     <>
-      <Header showInfinity={true} heading="Reveal" name1="Karan's Image" />
+      {/* <Header showInfinity={true} heading="Reveal" name1="Karan's Image" /> */}
       <motion.div
         whileTap={{ scale: 1.1 }}
         ref={boxRef}
-        className="w-screen h-[90dvh] mt-[10dvh] overflow-hidden relative reveal cursor-pointer"
+        className="w-screen h-dvh overflow-hidden relative reveal cursor-pointer"
         onMouseMove={(e) => handleHover(e)}
         onMouseLeave={(e) => handleLeave(e)}
       >
