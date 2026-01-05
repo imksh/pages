@@ -149,7 +149,7 @@ const CurrencyConverter = () => {
         fun2={() => scroll(recentRef)}
         fun3={() => scroll(historyRef)}
         fun4={() => scroll(searchRef)}
-        color="bg-blue-500"
+        color="bg-blue-600"
       />
 
       <div

@@ -22,7 +22,7 @@ const Header = ({
   return (
     <div
       className={`fixed top-0 left-0 w-full z-99 ${
-        color ? color : "bg-blue-500"
+        color ? color : "bg-blue-600"
       } text-white flex flex-col px-4 md:px-16 min-h-[10dvh] justify-center`}
       onClick={(e) => e.stopPropagation()}
     >
