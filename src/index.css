@@ -14,10 +14,16 @@
   );
 }
 
-.gradient-currency{
-    background-image: linear-gradient(to bottom, #175bec, #1063f1, #0a6bf6, #0673fb, #077bff);
+.gradient-currency {
+  background-image: linear-gradient(
+    to bottom,
+    #175bec,
+    #1063f1,
+    #0a6bf6,
+    #0673fb,
+    #077bff
+  );
 }
-
 
 .colorGradient {
   background-image: linear-gradient(
@@ -71,12 +77,43 @@
   filter: brightness(95%) contrast(125%) saturate(110%) hue-rotate(160deg);
 }
 
-.soft{
+.soft {
   filter: brightness(110%) contrast(95%) saturate(105%);
 }
 
+/* Reveal */
 
+.reveal .overlay {
+  pointer-events: none;
+  mask-image: radial-gradient(
+    circle 0px at var(--x, 50%) var(--y, 50%),
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0) 80%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle 0px at var(--x, 50%) var(--y, 50%),
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0) 90%
+  );
 
+  transition: mask-image 0.15s ease, -webkit-mask-image 0.15s ease;
+}
+
+.reveal:hover {
+  .overlay {
+    pointer-events: none;
+    mask-image: radial-gradient(
+      circle 250px at var(--x, 50%) var(--y, 50%),
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0) 80%
+    );
+    -webkit-mask-image: radial-gradient(
+      circle 250px at var(--x, 50%) var(--y, 50%),
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0) 90%
+    );
+  }
+}
 
 /* animation */
 
@@ -92,28 +129,25 @@
   }
 }
 
-
-
-
 /* shape divider */
 
 .custom-shape-divider-bottom-1767276540 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
 }
 
 .custom-shape-divider-bottom-1767276540 svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 250px;
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 250px;
 }
 
 .custom-shape-divider-bottom-1767276540 .shape-fill {
-    fill: #FFFFFF;
+  fill: #ffffff;
 }

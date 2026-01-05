@@ -10,6 +10,11 @@
     "img": "/images/home/wonders.png"
   },
   {
+    "title": "Reveal",
+    "link": "/reveal",
+    "img": "/images/home/reveal.png"
+  },
+  {
     "title": "Snake & Ladder",
     "link": "/snake-and-ladder",
     "img": "/images/home/snakeLadder.png"

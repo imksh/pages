@@ -13,8 +13,10 @@ import Camera from "./pages/Camera";
 import CurrencyConverter from "./pages/CurrencyConverter";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Error404 from './pages/Error404';
-import Wonders from './pages/Wonders';
+import Error404 from "./pages/Error404";
+import Wonders from "./pages/Wonders";
+import Karan from "./pages/Reveal/Karan";
+import Reveal from "./pages/Reveal";
 
 const App = () => {
   useEffect(() => {
@@ -36,6 +38,8 @@ const App = () => {
           <Route path="/camera" element={<Camera />} />
           <Route path="/wonders" element={<Wonders />} />
           <Route path="/currency-converter" element={<CurrencyConverter />} />
+          <Route path="/reveal" element={<Reveal />} />
+          <Route path="/reveal/karan" element={<Karan />} />
           <Route path="/*" element={<Error404 />} />
         </Routes>
       </BrowserRouter>
