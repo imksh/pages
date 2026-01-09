@@ -315,16 +315,31 @@ const Countdown = () => {
               dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
               dragElastic={0.3}
               animate={showAnimation.id === "1" ? { scale: 2.5 } : {}}
-              className="m-auto"
+              className="m-auto z-50"
             >
               <Lottie
                 animationData={showAnimation.animation}
-                className="w-40 h-40 cursor-pointer"
+                className="w-40 h-40 cursor-pointer  z-50"
               />
             </motion.div>
           </div>
         </div>
       </div>
+
+      {!dev && (
+        <motion.button
+          whileTap={{ scale: 0.9 }}
+          whileHover={{ scale: 1.1 }}
+          onClick={() => {
+            navigate("/countdown");
+            setDev(true);
+            setDone(false);
+          }}
+          className="absolute bottom-5 left-[50%] -translate-x-[50%] text-white underline cursor-pointer hover:text-blue-700"
+        >
+          Create a Countdown
+        </motion.button>
+      )}
 
       {done && (
         <>
