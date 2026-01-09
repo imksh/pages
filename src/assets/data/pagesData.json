@@ -10,6 +10,11 @@
     "img": "/images/home/wonders.png"
   },
   {
+    "title": "Countly",
+    "link": "/countdown",
+    "img": "/images/home/countly.png"
+  },
+  {
     "title": "Reveal",
     "link": "/reveal",
     "img": "/images/home/reveal.png"

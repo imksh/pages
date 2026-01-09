@@ -3,8 +3,8 @@ import useWindowSize from "../hooks/useWindowSize";
 import Animation from "../components/Animation";
 import celebrate from "../assets/animations/celebrate.json";
 import heart from "../assets/animations/heart.json";
-import Lottie from "lottie-react";
 import { toast, Toaster } from "react-hot-toast";
+import Lottie from "lottie-react";
 import { motion } from "motion/react";
 import Pookie from "../assets/animations/pookie.json";
 

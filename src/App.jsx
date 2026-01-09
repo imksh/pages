@@ -17,6 +17,7 @@ import Error404 from "./pages/Error404";
 import Wonders from "./pages/Wonders";
 import Karan from "./pages/Reveal/Karan";
 import Reveal from "./pages/Reveal";
+import Countdown from "./pages/Countdown";
 
 const App = () => {
   useEffect(() => {
@@ -40,6 +41,12 @@ const App = () => {
           <Route path="/currency-converter" element={<CurrencyConverter />} />
           <Route path="/reveal" element={<Reveal />} />
           <Route path="/reveal/karan" element={<Karan />} />
+          <Route path="/countdown" element={<Countdown />} />
+          <Route
+            path="/countdown/:date/:title/:message/:theme/:animation"
+            element={<Countdown />}
+          />
+
           <Route path="/*" element={<Error404 />} />
         </Routes>
       </BrowserRouter>

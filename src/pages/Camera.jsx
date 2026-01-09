@@ -326,7 +326,7 @@ function Camera() {
                 </button>
               </div>
             ) : (
-              <div className="filters flex overflow-auto hide-scrollbar w-full md:grid grid-cols-6 gap-3 py-1 ">
+              <div className=" flex overflow-auto hide-scrollbar w-full md:grid grid-cols-6 gap-3 py-1 ">
                 <button
                   className={`text-white border-2 mx-auto  w-6 h-6 rounded-full bg-pink-300 cursor-pointer ${
                     theme === "pink" ? `border-white ` : "border-black"
