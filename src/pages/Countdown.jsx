@@ -295,7 +295,7 @@ const Countdown = () => {
         )}
         <div
           className={`flex flex-col items-center mx-auto  ${
-            dev ? "min-h-[90dvh]" : "min-h-dvh"
+            dev ? "h-[90dvh]" : "h-dvh"
           }`}
           ref={animationRef}
         >
@@ -314,7 +314,10 @@ const Countdown = () => {
             <div
               className="h-3 bg-green-500 rounded-2xl transition-all absolute inset-0 z-10 duration-1000"
               style={{
-                width: `${((totalTime - startTime) * 100) / totalTime}%`,
+                width: `${Math.min(
+                  ((totalTime - startTime) * 100) / totalTime,
+                  100
+                )}%`,
               }}
             />
           </div>
@@ -365,7 +368,7 @@ const Countdown = () => {
             setDev(true);
             setDone(false);
           }}
-          className="absolute bottom-5 left-[50%] -translate-x-[50%] text-white underline cursor-pointer hover:text-blue-700"
+          className="absolute bottom-5 left-[50%] -translate-x-[50%] text-white underline cursor-pointer hover:text-blue-700 z-99"
         >
           Create a Countdown
         </motion.button>
