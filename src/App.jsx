@@ -43,7 +43,7 @@ const App = () => {
           <Route path="/reveal/karan" element={<Karan />} />
           <Route path="/countdown" element={<Countdown />} />
           <Route
-            path="/countdown/:date/:title/:message/:theme/:animation"
+            path="/countdown/:start/:date/:title/:message/:theme/:animation"
             element={<Countdown />}
           />
 

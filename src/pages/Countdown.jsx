@@ -30,12 +30,19 @@ const themeMap = {
 const Countdown = () => {
   //initial required data and functiions
   const navigate = useNavigate();
-  const { message, title, theme, date, animation } = useParams();
+  const { start, message, title, theme, date, animation } = useParams();
   const width = window.innerWidth;
   const toDateTimeLocal = (date) => {
     const offset = date.getTimezoneOffset() * 60000;
     return new Date(date.getTime() - offset).toISOString().slice(0, 16);
   };
+  const [startTime, setStartTime] = useState(
+    new Date() - new Date(decodeURIComponent(start))
+  );
+
+  const [devStartTime, setDevStartTime] = useState(new Date());
+
+  const [totalTime, setTotalTime] = useState(0);
 
   //useStates
   const [showAnimation, setShowAnimation] = useState(
@@ -63,6 +70,10 @@ const Countdown = () => {
 
   //useEffects
 
+  useEffect(() => {
+    setTotalTime(new Date(decodeURIComponent(date)) - new Date());
+  }, []);
+
   //set target if date is not provided
   useEffect(() => {
     const fun = () => {
@@ -78,7 +89,8 @@ const Countdown = () => {
   //set input time
   useEffect(() => {
     const safe = selectTime.length === 16 ? selectTime + ":00" : selectTime;
-
+    setDevStartTime(new Date().toISOString());
+    setTotalTime(new Date(safe) - new Date());
     setInput((prev) => ({
       ...prev,
       time: safe,
@@ -123,6 +135,12 @@ const Countdown = () => {
 
       const curr = new Date();
       const diff = targetRef.current - curr;
+
+      if (dev) {
+        setStartTime(new Date() - new Date(devStartTime));
+      } else {
+        setStartTime(new Date() - new Date(decodeURIComponent(start)));
+      }
 
       if (diff <= 0) {
         setHrs("0");
@@ -169,13 +187,16 @@ const Countdown = () => {
   const handleGenerate = () => {
     const convertedTitle = input.title.split(" ").join("-") || "null";
     const convertedMessage = input.message.split(" ").join("-") || "null";
+    const curr = new Date();
+    const encodedCurr = encodeURIComponent(curr.toISOString());
     const encodedTime = encodeURIComponent(input.time);
 
-    const link = `https://imksh-pages.netlify.app/countdown/${encodedTime}/${convertedTitle}/${convertedMessage}/${input.theme}/${input.animation}`;
+    const link = `https://imksh-pages.netlify.app/countdown/${encodedCurr}/${encodedTime}/${convertedTitle}/${convertedMessage}/${input.theme}/${input.animation}`;
 
     navigate(
-      `/countdown/${encodedTime}/${convertedTitle}/${convertedMessage}/${input.theme}/${input.animation}`
+      `/countdown/${encodedCurr}/${encodedTime}/${convertedTitle}/${convertedMessage}/${input.theme}/${input.animation}`
     );
+    setTotalTime(new Date(decodeURIComponent(encodedTime)) - new Date());
     copyToClipboard(link);
     setDev(false);
   };
@@ -205,12 +226,12 @@ const Countdown = () => {
       )}
       <div
         className={`${themeMap[theme || input.theme] || "bg-blue-400"} ${
-          dev ? "h-[90dvh] mt-[10dvh]" : "h-dvh"
-        } w-screen overflow-x-hidden md:overflow-y-hidden flex flex-col md:flex-row `}
+          dev ? "min-h-[90dvh] mt-[10dvh]" : "h-dvh"
+        } w-screen overflow-x-hidden flex flex-col md:flex-row hide-scrollbar`}
       >
         {dev && (
           <div
-            className=" md:w-[50%] lg:min-w-[60%] border-r min-h-[90dvh] flex items-center justify-center"
+            className=" md:w-[50%] lg:min-w-[60%] md:border-r border-gray-200 min-h-[90dvh] flex items-center justify-center my-4"
             ref={setAnimationRef}
           >
             <div className="bg-white px-4 py-8 md:p-12 flex flex-col w-[90%] lg:w-[50%] gap-4 rounded-2xl m-auto ">
@@ -264,7 +285,7 @@ const Countdown = () => {
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 whileHover={{ scale: 1.05 }}
-                className="px-6 py-3 bg-blue-500 hover:bg-blue-700 text-white rounded-lg cursor-pointer"
+                className="px-6 py-3 bg-blue-500 hover:bg-blue-700 text-white rounded-lg cursor-pointer "
                 onClick={handleGenerate}
               >
                 Generate
@@ -273,7 +294,7 @@ const Countdown = () => {
           </div>
         )}
         <div
-          className={`flex flex-col items-center mx-auto ${
+          className={`flex flex-col items-center mx-auto  ${
             dev ? "min-h-[90dvh]" : "min-h-dvh"
           }`}
           ref={animationRef}
@@ -287,6 +308,15 @@ const Countdown = () => {
             {done && (
               <Lottie animationData={celebrate} loop className="absolute" />
             )}
+          </div>
+          <div className="w-full rounded-2xl relative mb-8">
+            <div className="w-full rounded-2xl overflow-hidden absolute h-3 inset-0 bg-gray-500 "></div>
+            <div
+              className="h-3 bg-green-500 rounded-2xl transition-all absolute inset-0 z-10 duration-1000"
+              style={{
+                width: `${((totalTime - startTime) * 100) / totalTime}%`,
+              }}
+            />
           </div>
           <div className="flex flex-col items-center justify-center text-white h-full">
             <p className="text-3xl lg:text-5xl font-extrabold text-center">
@@ -315,11 +345,11 @@ const Countdown = () => {
               dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
               dragElastic={0.3}
               animate={showAnimation.id === "1" ? { scale: 2.5 } : {}}
-              className="m-auto z-50"
+              className="m-auto z-50 "
             >
               <Lottie
                 animationData={showAnimation.animation}
-                className="w-40 h-40 cursor-pointer  z-50"
+                className="w-40 h-40 cursor-pointer z-50"
               />
             </motion.div>
           </div>
