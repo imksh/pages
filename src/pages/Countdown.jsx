@@ -171,7 +171,7 @@ const Countdown = () => {
     const convertedMessage = input.message.split(" ").join("-") || "null";
     const encodedTime = encodeURIComponent(input.time);
 
-    const link = `https://imksh-pages.netlify.app/${encodedTime}/${convertedTitle}/${convertedMessage}/${input.theme}/${input.animation}`;
+    const link = `https://imksh-pages.netlify.app/countdown/${encodedTime}/${convertedTitle}/${convertedMessage}/${input.theme}/${input.animation}`;
 
     navigate(
       `/countdown/${encodedTime}/${convertedTitle}/${convertedMessage}/${input.theme}/${input.animation}`
