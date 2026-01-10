@@ -2,46 +2,65 @@
   {
     "title": "TrueRate",
     "link": "/currency-converter",
-    "img": "/images/home/trueRate.png"
+    "img": "/images/home/trueRate.png",
+    "tech": "React , Tailwind, API",
+    "desc": "TrueRate is a simple Currency Converter as a weekend side project. You can convert between multiple currencies and see clean, instant result."
   },
   {
     "title": "Wonders of World",
     "link": "/wonders",
-    "img": "/images/home/wonders.png"
+    "img": "/images/home/wonders.png",
+    "tech": "React , Tailwind",
+    "desc": "This is a interactive “Wonders of the World” showcase that brings iconic landmarks to life using a cool slice animation effect. Each wonder animates in with motion and reveals a bit of its story — a small way to make learning visual and fun"
   },
   {
     "title": "Countly",
     "link": "/countdown",
-    "img": "/images/home/countly.png"
+    "img": "/images/home/countly.png",
+    "tech": "React",
+    "desc": "A custom countdown generator where you can create a personalized countdown page and share it as a link."
   },
   {
     "title": "Reveal",
     "link": "/reveal",
-    "img": "/images/home/reveal.png"
+    "img": "/images/home/reveal.png",
+    "desc": "A webpage where an image is revealed only when you hover over it. Simple idea surprisingly satisfying result.",
+    "tech": "React"
   },
   {
     "title": "Snake & Ladder",
     "link": "/snake-and-ladder",
-    "img": "/images/home/snakeLadder.png"
+    "img": "/images/home/snakeLadder.png",
+    "desc": "Snake & Ladder Game for Web  using React.",
+    "tech": "React"
   },
   {
     "title": "Galary",
     "link": "/galary",
-    "img": "/images/home/galary.png"
+    "img": "/images/home/galary.png",
+    "desc": "Built a small experiment where an image is mapped onto a cylinder geometry and rotated, creating a circular image effect.",
+    "tech": "React, ThreeJs"
   },
   {
     "title": "Photo Booth",
     "link": "/camera",
-    "img": "/images/home/photoBooth.png"
+    "img": "/images/home/photoBooth.png",
+    "tech": "React",
+    "desc": "Built a small project using React — a web-based photo booth that: Captures photos from the camera, Lets users apply filters, Creates a collage OR saves a single photo, Allows downloading the final image.",
+    "tech": "React"
   },
   {
     "title": "Love Me?",
     "link": "/loveMe",
-    "img": "/images/home/loveMe.png"
+    "img": "/images/home/loveMe.png",
+    "desc": "a tiny project called 'Do you love me?'. Two buttons:✔️ Yes ,❌ No. And as soon as you go near No……it sprints like Usain Bolt. Gone. Vanished. Teleported. 😂",
+    "tech": "React"
   },
   {
     "title": "Paint",
     "link": "/paint",
-    "img": "/images/home/paint.jpeg"
+    "img": "/images/home/paint.jpeg",
+    "desc": "Played around with the canvas to build a simple online paint tool that works smoothly across screen sizes. Mostly just exploring how drawing, events, and responsiveness behave in the browser.",
+    "tech": "React"
   }
 ]
