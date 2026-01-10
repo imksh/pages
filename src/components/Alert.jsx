@@ -20,7 +20,7 @@ const Alert = ({ name, message, fun, setShow }) => {
           className="px-4 py-2 border rounded cursor-pointer  bg-red-600  hover:bg-red-500 text-white font-bold"
           onClick={() => setShow(false)}
         >
-          Cancle
+          Cancel
         </button>
         <button
           className="px-4 py-2 border rounded cursor-pointer bg-blue-500 hover:bg-green-700 text-white font-black"

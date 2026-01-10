@@ -28,7 +28,7 @@ const HomeCard = ({ item, key, val }) => {
         <motion.button
           whileTap={{ scale: 0.9 }}
           whileHover={{ scale: 1.1 }}
-          onClick={() => navigate(`/${item.link}`)}
+          onClick={() => navigate(item.link)}
           className="px-6 py-3 bg-blue-500 hover:bg-blue-700 rounded-lg w-fit ml-auto md:mt-auto md:mb-2 text-white cursor-pointer my-2"
         >
           Open
