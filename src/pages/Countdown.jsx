@@ -11,8 +11,10 @@ import infinity from "../assets/animations/infinity.json";
 import ChooseTheme from "../components/ChooseTheme";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
+import { FaBan } from "react-icons/fa";
 
 const animations = [
+  { id: "0" },
   { id: "1", animation: Pookie },
   { id: "2", animation: Heart },
   { id: "3", animation: infinity },
@@ -274,10 +276,14 @@ const Countdown = () => {
                     }`}
                     onClick={() => setInput({ ...input, animation: item.id })}
                   >
-                    <Lottie
-                      animationData={item.animation}
-                      className="w-20 h-20"
-                    />
+                    {item.id === "0" ? (
+                      <FaBan size={24} />
+                    ) : (
+                      <Lottie
+                        animationData={item.animation}
+                        className="w-20 h-20"
+                      />
+                    )}
                   </motion.button>
                 ))}
               </div>
