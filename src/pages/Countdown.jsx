@@ -38,18 +38,13 @@ const Countdown = () => {
     const offset = date.getTimezoneOffset() * 60000;
     return new Date(date.getTime() - offset).toISOString().slice(0, 16);
   };
-  const [startTime, setStartTime] = useState(
-    new Date() - new Date(decodeURIComponent(start))
-  );
-
-  const [devStartTime, setDevStartTime] = useState(new Date());
-
-  const [totalTime, setTotalTime] = useState(0);
-
+  
   //useStates
   const [showAnimation, setShowAnimation] = useState(
-    animations.find((a) => a.id === animation) || animations[0]
+    animations.find((a) => a.id === animation) || animations[1]
   );
+  const [startTs, setStartTs] = useState(null);
+  const [endTs, setEndTs] = useState(null);
   const [dev, setDev] = useState(false);
   const [selectTheme, setSelectTheme] = useState("blue");
   const [done, setDone] = useState(false);
@@ -70,11 +65,33 @@ const Countdown = () => {
   const animationRef = useRef(null);
   const setAnimationRef = useRef(null);
 
-  //useEffects
+  const [now, setNow] = useState();
+
+  const progress =
+    startTs && endTs
+      ? Math.max(100 - ((now - startTs) * 100) / (endTs - startTs), 0)
+      : 100;
 
   useEffect(() => {
-    setTotalTime(new Date(decodeURIComponent(date)) - new Date());
+    const t = setInterval(() => {
+      setNow(Date.now());
+    }, 1000);
+
+    return () => clearInterval(t);
   }, []);
+
+  useEffect(() => {
+    if (!date || !start) return;
+
+    const startTime = new Date(decodeURIComponent(start)).getTime();
+    const endTime = new Date(decodeURIComponent(date)).getTime();
+
+    setStartTs(startTime);
+    setEndTs(endTime);
+  }, [start, date]);
+
+  //useEffects
+
 
   //set target if date is not provided
   useEffect(() => {
@@ -91,8 +108,6 @@ const Countdown = () => {
   //set input time
   useEffect(() => {
     const safe = selectTime.length === 16 ? selectTime + ":00" : selectTime;
-    setDevStartTime(new Date().toISOString());
-    setTotalTime(new Date(safe) - new Date());
     setInput((prev) => ({
       ...prev,
       time: safe,
@@ -137,12 +152,6 @@ const Countdown = () => {
 
       const curr = new Date();
       const diff = targetRef.current - curr;
-
-      if (dev) {
-        setStartTime(new Date() - new Date(devStartTime));
-      } else {
-        setStartTime(new Date() - new Date(decodeURIComponent(start)));
-      }
 
       if (diff <= 0) {
         setHrs("0");
@@ -198,7 +207,6 @@ const Countdown = () => {
     navigate(
       `/countdown/${encodedCurr}/${encodedTime}/${convertedTitle}/${convertedMessage}/${input.theme}/${input.animation}`
     );
-    setTotalTime(new Date(decodeURIComponent(encodedTime)) - new Date());
     copyToClipboard(link);
     setDev(false);
   };
@@ -320,14 +328,11 @@ const Countdown = () => {
             <div
               className="h-3 bg-green-500 rounded-2xl transition-all absolute inset-0 z-10 duration-1000"
               style={{
-                width: `${Math.min(
-                  ((totalTime - startTime) * 100) / totalTime,
-                  100
-                )}%`,
+                width: `${progress}%`,
               }}
             />
           </div>
-          <div className="flex flex-col items-center justify-center text-white h-full">
+          <div className="flex flex-col relative items-center justify-center text-white h-full">
             <p className="text-3xl lg:text-5xl font-extrabold text-center">
               {dev
                 ? input.title || "Countdown Title"
@@ -337,7 +342,7 @@ const Countdown = () => {
                   : title.split("-").join(" ")
                 : ""}
             </p>
-            <p clsssName="my-8 text-center">
+            <p className="my-8 text-center absolute w-screen top-5  md:max-w-[60vw]">
               {dev
                 ? input.message || "Add Message here"
                 : message
@@ -354,7 +359,7 @@ const Countdown = () => {
               dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
               dragElastic={0.3}
               animate={showAnimation.id === "1" ? { scale: 2.5 } : {}}
-              className="m-auto z-50 "
+              className="m-auto z-50 relative bottom-10"
             >
               <Lottie
                 animationData={showAnimation.animation}
@@ -374,7 +379,7 @@ const Countdown = () => {
             setDev(true);
             setDone(false);
           }}
-          className="absolute bottom-5 left-[50%] -translate-x-[50%] text-white underline cursor-pointer hover:text-blue-700 z-99"
+          className="absolute bottom-3 left-1 md:left-10  text-white underline cursor-pointer hover:text-blue-700 z-99"
         >
           Create a Countdown
         </motion.button>
