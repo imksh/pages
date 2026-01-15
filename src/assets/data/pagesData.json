@@ -14,6 +14,13 @@
     "desc": "This is a interactive “Wonders of the World” showcase that brings iconic landmarks to life using a cool slice animation effect. Each wonder animates in with motion and reveals a bit of its story — a small way to make learning visual and fun"
   },
   {
+    "title": "NoteDesk",
+    "link": "/notes",
+    "img": "/images/home/notes.png",
+    "tech": "React, Node, MongoDB, Express",
+    "desc": "Write, save, and organize your notes in one place. Pages Notes helps you stay focused and productive across all your apps."
+  },
+  {
     "title": "Countly",
     "link": "/countdown",
     "img": "/images/home/countly.png",

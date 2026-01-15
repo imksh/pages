@@ -9,13 +9,15 @@ import Footer from "../components/Footer";
 import { FaSearch } from "react-icons/fa";
 import { IoSearchOutline } from "react-icons/io5";
 import HomeCard from "../components/HomeCard";
+import useAuthStore from "../store/useAuthStore";
 
 const Home = () => {
+  const { user, loading, logout } = useAuthStore();
+
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState("");
   const [input2, setInput2] = useState("");
-  const timerRef = useRef(null);
   const [searchData, setSearchData] = useState(data);
   const [mainData, setMainData] = useState(data);
   useEffect(() => {
@@ -54,6 +56,7 @@ const Home = () => {
         heading="Pages"
         name1="A collection of works"
       />
+
       <div className=" w-screen flex items-center justify-center pt-[10vh] h-screen overflow-hidden">
         <div className="w-[20%] hidden md:block   h-full py-4  shadow-2xl overflow-auto hide-scrollbar">
           <div className="relative flex justify-center items-center">

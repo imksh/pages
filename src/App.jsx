@@ -11,23 +11,35 @@ import SnakeAndLadder from "./pages/SnakeAndLadder";
 import Ludo from "./pages/Ludo";
 import Camera from "./pages/Camera";
 import CurrencyConverter from "./pages/CurrencyConverter";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Error404 from "./pages/Error404";
 import Wonders from "./pages/Wonders";
 import Karan from "./pages/Reveal/Karan";
 import Reveal from "./pages/Reveal";
 import Countdown from "./pages/Countdown";
+import Notes from "./pages/Notes";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import useAuthStore from "./store/useAuthStore";
+import Loading from "./components/Loading";
 
 const App = () => {
+  const { user, loading, checkAuth } = useAuthStore();
+
   useEffect(() => {
-    AOS.init({ duration: 800, easing: "ease-in-out", mirror: true });
+    const fun = () => {
+      checkAuth();
+    };
+    fun();
   }, []);
+
+  if (loading) return <Loading />;
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/loveMe" element={<LoveMe />} />
           <Route path="/snake-and-ladder" element={<SnakeAndLadder />} />
           <Route path="/galary" element={<Galary />} />
@@ -41,6 +53,7 @@ const App = () => {
           <Route path="/currency-converter" element={<CurrencyConverter />} />
           <Route path="/reveal" element={<Reveal />} />
           <Route path="/reveal/karan" element={<Karan />} />
+          <Route path="/notes" element={user ? <Notes /> : <Login />} />
           <Route path="/countdown" element={<Countdown />} />
           <Route
             path="/countdown/:start/:date/:title/:message/:theme/:animation"
