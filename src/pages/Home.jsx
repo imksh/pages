@@ -95,7 +95,7 @@ const Home = () => {
             </AnimatePresence>
           </div>
         </div>
-        <div className="h-full items-center w-full md:w-[80%]  overflow-auto hide-scrollbar">
+        <div className="h-full items-center w-full md:w-[80%]  overflow-y-auto overflow-x-hidden hide-scrollbar">
           <motion.div
             whileTap={{ scale: 1.5 }}
             className="relative h-[240px] md:h-[320px] w-full bg-cover bg-center overflow-hidden "
