@@ -28,10 +28,8 @@ const Notes = () => {
   const size = useWindowSize();
 
   useMobileBack(() => {
-    if (size.width < 640) {
+    if (size.width < 645) {
       setSelected("");
-    } else {
-      navigate("/");
     }
   });
 
