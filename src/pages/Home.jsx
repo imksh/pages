@@ -54,10 +54,12 @@ const Home = () => {
         showInfinity={true}
         heading="Pages"
         showUser={true}
-        name1={user ? "" : "Login"}
-        name2={user ? "" : "Register"}
-        fun1={()=>navigate("/login")}
-        fun2={()=>navigate("/register")}
+        name1={user ? "" : "Home"}
+        name2={user ? "" : "Login"}
+        name3={user ? "" : "Register"}
+        fun1={() => navigate("/")}
+        fun2={() => navigate("/login")}
+        fun3={() => navigate("/register")}
       />
 
       <div className=" w-screen flex items-center justify-center pt-[10vh] h-screen overflow-hidden">
@@ -98,7 +100,7 @@ const Home = () => {
         <div className="h-full items-center w-full md:w-[80%]  overflow-y-auto overflow-x-hidden hide-scrollbar">
           <motion.div
             whileTap={{ scale: 1.5 }}
-            className="relative h-[240px] md:h-[320px] w-full bg-cover bg-center overflow-hidden "
+            className="relative h-[150px] sm:h-[240px] md:h-[320px] w-full bg-cover bg-center overflow-hidden "
           >
             <AnimatePresence mode="wait">
               <motion.img
@@ -120,14 +122,14 @@ const Home = () => {
                 exit={{ x: -200, opacity: 0 }}
                 transition={{ duration: 0.8 }}
                 onClick={() => navigate(data[index].link)}
-                className="absolute right-4 md:right-10 bottom-10 z-10 px-4 md:px-6 py-3 bg-blue-500 text-white rounded-md cursor-pointer hover:bg-blue-600 shadow"
+                className="absolute right-4 md:right-10 bottom-3 sm:bottom-10 z-10 py-2 px-4 md:px-6 md:py-3 bg-blue-500 text-white rounded-md cursor-pointer hover:bg-blue-600 shadow"
               >
                 Visit {data[index].title}
               </motion.button>
             </AnimatePresence>
           </motion.div>
 
-          <div className="flex flex-col p-4">
+          <div className="flex flex-col p-2 md:p-4">
             <div className="col-span-2 md:col-span-4 w-full md:w-[50%] mx-auto relative flex justify-center items-center mb-4 md:hidden">
               <IoSearchOutline className="absolute left-3 " />
               <input

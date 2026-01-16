@@ -151,3 +151,8 @@
 .custom-shape-divider-bottom-1767276540 .shape-fill {
   fill: #ffffff;
 }
+@media (max-width: 500px) {
+  p {
+    font-size: 14px;
+  }
+}

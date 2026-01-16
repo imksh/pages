@@ -15,7 +15,7 @@ const HomeCard = ({ item, key, val }) => {
       transition={{ duration: 0.6 }}
       onClick={() => navigate(item.link)}
       whileHover={{ scale: 1.01 }}
-      className="w-full p-4 md:p-8 shadow my-4 rounded-2xl flex flex-col md:flex-row md:gap-8 cursor-pointer"
+      className="w-full p-4 md:p-8 shadow-sm md:shadow my-4 rounded-2xl flex flex-col md:flex-row md:gap-8 cursor-pointer"
     >
       <img
         src={item.img}
