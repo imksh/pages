@@ -9,6 +9,7 @@ import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import useAuthStore from "../store/useAuthStore";
 import Footer from "../components/Footer";
 import { Link, useNavigate } from "react-router-dom";
+import Header from "../components/Header";
 
 const Register = () => {
   const [data, setData] = useState({
@@ -89,7 +90,15 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col bg-slate-50  items-center justify-center  w-full py-8 hide-scrollbar">
+    <div className="flex flex-col bg-slate-50  items-center justify-center  w-full  hide-scrollbar py-[15dvh]">
+      <Header
+        showInfinity={true}
+        heading="Pages"
+        name1="Home"
+        fun1={() => navigate("/")}
+        name2="Login"
+        fun2={() => navigate("/login")}
+      />
       <img src={logo} className="w-30 " />
       <p className="my-5">Your digital workspace begins here.</p>
       <form

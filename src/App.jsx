@@ -21,9 +21,12 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import useAuthStore from "./store/useAuthStore";
 import Loading from "./components/Loading";
+import Profile from "./pages/Profile";
+import useUiStore from "./store/useUiStore";
 
 const App = () => {
-  const { user, loading, checkAuth } = useAuthStore();
+  const { user, isChecking, checkAuth } = useAuthStore();
+  const { setShowHeader } = useUiStore();
 
   useEffect(() => {
     const fun = () => {
@@ -32,14 +35,25 @@ const App = () => {
     fun();
   }, []);
 
-  if (loading) return <Loading />;
+  if (isChecking) return <Loading />;
   return (
-    <>
+    <div
+      onClick={() => {
+        setShowHeader(false);
+      }}
+    >
       <BrowserRouter>
         <Routes>
+          {/* Auth */}
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={user ? <Home /> : <Login />} />
+          <Route path="/register" element={user ? <Home /> : <Register />} />
+          <Route path="/profile" element={user ? <Profile /> : <Login />} />
+
+          {/* Auth Based */}
+          <Route path="/notes" element={user ? <Notes /> : <Login />} />
+
+          {/* Public */}
           <Route path="/loveMe" element={<LoveMe />} />
           <Route path="/snake-and-ladder" element={<SnakeAndLadder />} />
           <Route path="/galary" element={<Galary />} />
@@ -53,18 +67,19 @@ const App = () => {
           <Route path="/currency-converter" element={<CurrencyConverter />} />
           <Route path="/reveal" element={<Reveal />} />
           <Route path="/reveal/karan" element={<Karan />} />
-          <Route path="/notes" element={user ? <Notes /> : <Login />} />
+
+          {/* Query Based */}
           <Route path="/countdown" element={<Countdown />} />
           <Route
             path="/countdown/:start/:date/:title/:message/:theme/:animation"
             element={<Countdown />}
           />
 
+          {/* Error 404 */}
           <Route path="/*" element={<Error404 />} />
         </Routes>
       </BrowserRouter>
-      {/* <Toaster /> */}
-    </>
+    </div>
   );
 };
 

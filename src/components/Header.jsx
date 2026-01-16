@@ -4,6 +4,9 @@ import infinity from "../assets/animations/infinity.json";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
 import { motion, AnimatePresence } from "motion/react";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../store/useAuthStore";
+import useUiStore from "../store/useUiStore";
 
 const Header = ({
   showInfinity,
@@ -17,12 +20,22 @@ const Header = ({
   fun3,
   fun4,
   color,
+  showUser,
 }) => {
-  const [show, setShow] = useState();
+  const { user } = useAuthStore();
+  const { showHeader, setShowHeader } = useUiStore();
+  const navigate = useNavigate();
+  const getInitials = (name = "") => {
+    const parts = name.trim().split(" ");
+    if (parts.length === 1) return parts[0][0]?.toUpperCase() || "";
+    return `${parts[0][0]} ${parts[1][0]}`.toUpperCase();
+  };
   return (
     <div
       className={`fixed top-0 left-0 w-full z-99 ${
         color ? color : "bg-blue-600"
+      } ${
+        showHeader ? "rounded-b-2xl" : ""
       } text-white flex flex-col px-4 md:px-16 min-h-[10dvh] justify-center`}
       onClick={(e) => e.stopPropagation()}
     >
@@ -88,6 +101,19 @@ const Header = ({
               {name4}
             </motion.button>
           )}
+
+          {showUser && user && (
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              onClick={() => navigate("/profile")}
+              className={`text-white border bg-blue-400 rounded-full p-2 min-w-10 aspect-square text-center cursor-pointer ${
+                location === "/profile" ? "border-white" : "border-(--primary) "
+              }`}
+            >
+              {getInitials(user?.name)}
+            </motion.button>
+          )}
         </div>
         {fun1 && (
           <div className="flex md:hidden">
@@ -95,10 +121,10 @@ const Header = ({
               whileTap={{ scale: 0.8 }}
               onClick={(e) => {
                 e.stopPropagation();
-                setShow(!show);
+                setShowHeader(!showHeader);
               }}
             >
-              {show ? (
+              {showHeader ? (
                 <IoCloseSharp size={30} />
               ) : (
                 <GiHamburgerMenu size={24} />
@@ -108,7 +134,7 @@ const Header = ({
         )}
       </div>
       <AnimatePresence>
-        {show && (
+        {showHeader && (
           <motion.div
             className="flex  md:hidden flex-col items-baseline gap-3 mx-4 mb-4"
             exit={{ opacity: 0, y: -100 }}
@@ -121,7 +147,7 @@ const Header = ({
                 whileTap={{ scale: 0.9 }}
                 onClick={() => {
                   fun1();
-                  setShow(false);
+                  setShowHeader(false);
                 }}
                 className="cursor-pointer w-full flex justify-baseline"
               >
@@ -133,7 +159,7 @@ const Header = ({
                 whileTap={{ scale: 0.9 }}
                 onClick={() => {
                   fun2();
-                  setShow(false);
+                  setShowHeader(false);
                 }}
                 className="cursor-pointer w-full flex justify-baseline"
               >
@@ -145,7 +171,7 @@ const Header = ({
                 whileTap={{ scale: 0.9 }}
                 onClick={() => {
                   fun3();
-                  setShow(false);
+                  setShowHeader(false);
                 }}
                 className="cursor-pointer w-full flex justify-baseline"
               >
@@ -157,11 +183,28 @@ const Header = ({
                 whileTap={{ scale: 0.9 }}
                 onClick={() => {
                   fun4();
-                  setShow(false);
+                  setShowHeader(false);
                 }}
                 className="cursor-pointer w-full flex justify-baseline"
               >
                 {name4}
+              </motion.button>
+            )}
+            {showUser && user && (
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.05 }}
+                onClick={() => {
+                  navigate("/profile");
+                  setShowHeader(false);
+                }}
+                className={`text-white border bg-blue-400 rounded-full p-2 min-w-10 aspect-square text-center cursor-pointer  ${
+                  location === "/profile"
+                    ? "border-white"
+                    : "border-(--primary) "
+                }`}
+              >
+                {getInitials(user?.name)}
               </motion.button>
             )}
           </motion.div>

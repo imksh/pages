@@ -40,11 +40,14 @@ const useAuthStore = create((set) => ({
 
   logout: async () => {
     try {
+      set({ loading: true });
       const res = await api.post("/auth/logout");
       toast.success("Logout Successfully");
       set({ user: null });
     } catch (error) {
       toast.error(error?.response?.data?.message || "Unknown Error");
+    } finally {
+      set({ loading: false });
     }
   },
 

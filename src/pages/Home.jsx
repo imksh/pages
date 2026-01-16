@@ -52,9 +52,12 @@ const Home = () => {
     <>
       <Header
         showInfinity={true}
-        color="bg-blue-600"
         heading="Pages"
-        name1="A collection of works"
+        showUser={true}
+        name1={user ? "" : "Login"}
+        name2={user ? "" : "Register"}
+        fun1={()=>navigate("/login")}
+        fun2={()=>navigate("/register")}
       />
 
       <div className=" w-screen flex items-center justify-center pt-[10vh] h-screen overflow-hidden">

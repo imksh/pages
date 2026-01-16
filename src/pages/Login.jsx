@@ -6,6 +6,7 @@ import { GoEyeClosed, GoEye } from "react-icons/go";
 import toast, { Toaster } from "react-hot-toast";
 import Footer from "../components/Footer";
 import useAuthStore from "../store/useAuthStore";
+import Header from "../components/Header";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -72,7 +73,15 @@ const Login = () => {
   };
 
   return (
-    <div className="pt-[10dvh] bg-slate-50">
+    <div className="py-[10dvh] bg-slate-50 ">
+      <Header
+        showInfinity={true}
+        heading="Pages"
+        name1="Home"
+        fun1={() => navigate("/")}
+        name2="Register"
+        fun2={() => navigate("/register")}
+      />
       <div className="w-52 h-52 rounded-full overflow-hidden mx-auto my-8">
         <RiveComponent />
       </div>

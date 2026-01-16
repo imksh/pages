@@ -1,14 +1,16 @@
 import React from "react";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
+import useWindowSize from "../hooks/useWindowSize";
 
 const HomeCard = ({ item, key, val }) => {
   const navigate = useNavigate();
+  const size = useWindowSize();
 
   return (
     <motion.button
-      initial={{ opacity: 0, x: val }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={size.width > 775 && { opacity: 0, x: val }}
+      whileInView={size.width > 775 && { opacity: 1, x: 0 }}
       viewport={{ once: false, amount: 0.4 }}
       transition={{ duration: 0.6 }}
       onClick={() => navigate(item.link)}
