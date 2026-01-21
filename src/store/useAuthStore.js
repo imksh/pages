@@ -57,7 +57,7 @@ const useAuthStore = create((set) => ({
       const res = await api.get("/auth/check");
       set({ user: res.data });
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Unknown Error");
+      console.log("Error in Checking auth: ", error);
     } finally {
       set({ isChecking: false });
     }
