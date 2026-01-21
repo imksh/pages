@@ -15,7 +15,7 @@ const Login = () => {
     password: "",
   });
   const navigate = useNavigate();
-  const loaction = useLocation().pathname;
+  const location = useLocation().pathname;
 
   const { login, loading } = useAuthStore();
   const STATE_MACHINE = "Login Machine";
