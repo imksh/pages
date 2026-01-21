@@ -96,6 +96,7 @@ const MatchGrid = () => {
 
   const handleSubmit = async () => {
     try {
+      if (!user) return;
       const res = await api.post("/pages/games/match-grid", {
         games: gameStat.games + 1,
         bestMove:
@@ -146,6 +147,7 @@ const MatchGrid = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
+        if (!user) return;
         const res = await api.get("/pages/games/match-grid");
         setGameStat(res.data);
       } catch (error) {
@@ -153,7 +155,7 @@ const MatchGrid = () => {
       }
     };
     fetch();
-  }, []);
+  }, [user]);
 
   const handleStart = () => {
     setFound([]);
@@ -195,7 +197,7 @@ const MatchGrid = () => {
           </h2>
         </div>
         <motion.div
-          animate={{ scale: [1,1.2,1] }}
+          animate={{ scale: [1, 1.2, 1] }}
           transition={{ repeat: Infinity, ease: "easeInOut", duration: 1 }}
           className="absolute left-[50%] -translate-x-[50%] text-3xl"
         >
