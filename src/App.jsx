@@ -23,6 +23,7 @@ import useAuthStore from "./store/useAuthStore";
 import Loading from "./components/Loading";
 import Profile from "./pages/Profile";
 import useUiStore from "./store/useUiStore";
+import MatchGrid from './pages/MatchGrid';
 
 const App = () => {
   const { user, isChecking, checkAuth } = useAuthStore();
@@ -67,6 +68,7 @@ const App = () => {
           <Route path="/currency-converter" element={<CurrencyConverter />} />
           <Route path="/reveal" element={<Reveal />} />
           <Route path="/reveal/karan" element={<Karan />} />
+          <Route path="/match-grid" element={<MatchGrid />} />
 
           {/* Query Based */}
           <Route path="/countdown" element={<Countdown />} />

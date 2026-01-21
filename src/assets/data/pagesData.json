@@ -28,6 +28,13 @@
     "desc": "A custom countdown generator where you can create a personalized countdown page and share it as a link."
   },
   {
+    "title": "MatchGrid",
+    "link": "/match-grid",
+    "img": "/images/home/matchGrid.png",
+    "tech": "React, Node.js",
+    "desc": "MatchGrid is a fast-paced memory game designed to test your focus, speed, and recall skills. Flip the cards, remember their positions, and find all matching emoji pairs before time runs out."
+  },
+  {
     "title": "Reveal",
     "link": "/reveal",
     "img": "/images/home/reveal.png",

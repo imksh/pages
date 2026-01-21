@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRive, useStateMachineInput } from "@rive-app/react-canvas";
 import { TbLoader2 } from "react-icons/tb";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { GoEyeClosed, GoEye } from "react-icons/go";
 import toast, { Toaster } from "react-hot-toast";
 import Footer from "../components/Footer";
@@ -15,6 +15,7 @@ const Login = () => {
     password: "",
   });
   const navigate = useNavigate();
+  const loaction = useLocation().pathname;
 
   const { login, loading } = useAuthStore();
   const STATE_MACHINE = "Login Machine";
@@ -73,15 +74,17 @@ const Login = () => {
   };
 
   return (
-    <div className="py-[10dvh] bg-slate-50 ">
-      <Header
-        showInfinity={true}
-        heading="Pages"
-        name1="Home"
-        fun1={() => navigate("/")}
-        name2="Register"
-        fun2={() => navigate("/register")}
-      />
+    <div className="py-[10dvh] bg-inherit ">
+      {location === "/login" && (
+        <Header
+          showInfinity={true}
+          heading="Pages"
+          name1="Home"
+          fun1={() => navigate("/")}
+          name2="Register"
+          fun2={() => navigate("/register")}
+        />
+      )}
       <div className="w-52 h-52 rounded-full overflow-hidden mx-auto my-8">
         <RiveComponent />
       </div>
@@ -136,7 +139,7 @@ const Login = () => {
         </div>
       </div>
 
-      <Footer />
+      {location === "/login" && <Footer />}
       <Toaster />
     </div>
   );
