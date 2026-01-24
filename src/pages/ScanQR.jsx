@@ -41,7 +41,7 @@ const ScanQR = () => {
           setResult(code.data);
           try {
             const res = await axios.get(code.data);
-            window.location.href = res.data.redirect;
+            window.open(res.data.redirect, "_blank");
           } catch (error) {
             console.log("Error in scan: ", error);
           }
