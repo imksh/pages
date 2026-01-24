@@ -1,5 +1,12 @@
 [
   {
+    "title": "ScanQR",
+    "link": "/scan-qr",
+    "img": "/images/home/trueRate.png",
+    "tech": "React , Tailwind, API",
+    "desc": "ScanQR Test"
+  },
+  {
     "title": "TrueRate",
     "link": "/currency-converter",
     "img": "/images/home/trueRate.png",

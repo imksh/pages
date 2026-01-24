@@ -24,6 +24,7 @@ import Loading from "./components/Loading";
 import Profile from "./pages/Profile";
 import useUiStore from "./store/useUiStore";
 import MatchGrid from './pages/MatchGrid';
+import ScanQR from './pages/ScanQR';
 
 const App = () => {
   const { user, isChecking, checkAuth } = useAuthStore();
@@ -69,6 +70,7 @@ const App = () => {
           <Route path="/reveal" element={<Reveal />} />
           <Route path="/reveal/karan" element={<Karan />} />
           <Route path="/match-grid" element={<MatchGrid />} />
+          <Route path="/scan-qr" element={<ScanQR />} />
 
           {/* Query Based */}
           <Route path="/countdown" element={<Countdown />} />
