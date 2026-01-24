@@ -38,10 +38,9 @@ const ScanQR = () => {
         const code = jsQR(imageData.data, canvas.width, canvas.height);
 
         if (code) {
-          setResult(code.data);
           try {
             const res = await axios.get(code.data);
-            window.open(res.data.redirect, "_blank");
+            setResult(res.data.redirect);
           } catch (error) {
             console.log("Error in scan: ", error);
           }
