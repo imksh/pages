@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import jsQR from "jsqr";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const ScanQR = () => {
   const videoRef = useRef(null);
@@ -38,6 +39,7 @@ const ScanQR = () => {
         const code = jsQR(imageData.data, canvas.width, canvas.height);
 
         if (code) {
+          toast.success(code.data);
           try {
             const res = await axios.get(code.data);
             setResult(res.data.redirect);
