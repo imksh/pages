@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import jsQR from "jsqr";
-import { axios } from "axios";
+import axios from "axios";
 
 const ScanQR = () => {
   const videoRef = useRef(null);
