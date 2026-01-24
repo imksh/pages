@@ -9,6 +9,7 @@ const ScanQR = () => {
   const scanningRef = useRef(true);
   const streamRef = useRef(null);
   const [result, setResult] = useState("");
+  const [url, setURL] = useState("");
 
   useEffect(() => {
     const handleVisibility = () => {
@@ -21,7 +22,6 @@ const ScanQR = () => {
 
     document.addEventListener("visibilitychange", handleVisibility);
 
-    // start initially
     startCamera();
 
     return () => {
@@ -77,6 +77,7 @@ const ScanQR = () => {
 
         try {
           const res = await axios.get(code.data);
+          setURL(res.data.redirect);
           window.open(res.data.redirect, "_blank");
           setResult(res.data.redirect);
         } catch (error) {
@@ -86,7 +87,6 @@ const ScanQR = () => {
         return;
       }
     }
-
     requestAnimationFrame(scan);
   };
 
@@ -98,7 +98,12 @@ const ScanQR = () => {
         className="w-[80%] aspect-square max-w-100 object-cover object-center border-4 border-blue-500 rounded-lg my-8"
       />
       <canvas ref={canvasRef} hidden />
-      <p>Result: {result}</p>
+      <a
+        href={url || "#"}
+        className={`${url ? "bg-blue-500 cursor-pointer" : "bg-slate-300 cursor-not-allowed"} decoration-0 text-white px-6 py-3 rounded`}
+      >
+        Open
+      </a>
     </div>
   );
 };
