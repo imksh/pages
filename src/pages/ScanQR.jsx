@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import jsQR from "jsqr";
 import axios from "axios";
-import { toast } from "react-hot-toast";
+import { toast } from 'react-hot-toast';
 
 const ScanQR = () => {
   const videoRef = useRef(null);
@@ -39,10 +39,11 @@ const ScanQR = () => {
         const code = jsQR(imageData.data, canvas.width, canvas.height);
 
         if (code) {
-          toast.success(code.data);
+          toast.success(code.data)
           try {
             const res = await axios.get(code.data);
-            setResult(res.data.redirect);
+            window.open(res.data.redirect, "_blank");
+            setResult(res.data.redirect)
           } catch (error) {
             console.log("Error in scan: ", error);
           }
@@ -64,8 +65,9 @@ const ScanQR = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-dvh flex justify-center items-center flex-col">
-      <video ref={videoRef} className="w-100 border-4 border-blue-500" />
+    <div className="w-full min-h-dvh flex justify-center items-center flex-col bg-blue-200">
+      <h2 className="text-xl font-extrabold">Scan the QR</h2>
+      <video ref={videoRef} className="w-[80%] aspect-square max-w-100 object-cover object-center border-4 border-blue-500 rounded-lg my-8" />
       <canvas ref={canvasRef} hidden />
       <p>Result: {result}</p>
     </div>
