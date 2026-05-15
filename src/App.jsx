@@ -23,8 +23,10 @@ import useAuthStore from "./store/useAuthStore";
 import Loading from "./components/Loading";
 import Profile from "./pages/Profile";
 import useUiStore from "./store/useUiStore";
-import MatchGrid from './pages/MatchGrid';
-import ScanQR from './pages/ScanQR';
+import MatchGrid from "./pages/MatchGrid";
+import ScanQR from "./pages/ScanQR";
+import Birthday from "./pages/birthday/Birthday";
+import BirthdayLayout from "./components/layouts/BirthdayLayout";
 
 const App = () => {
   const { user, isChecking, checkAuth } = useAuthStore();
@@ -37,7 +39,6 @@ const App = () => {
     fun();
   }, []);
 
-  if (isChecking) return <Loading />;
   return (
     <div
       onClick={() => {
@@ -81,6 +82,11 @@ const App = () => {
 
           {/* Error 404 */}
           <Route path="/*" element={<Error404 />} />
+
+          <Route element={<BirthdayLayout />}>
+            <Route path="/birthday/:name" element={<Birthday />} />
+            <Route path="/birthday/:name/:sender" element={<Birthday />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
