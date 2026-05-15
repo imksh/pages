@@ -15,7 +15,7 @@ const SurpriseWaiting = ({ onContinue, name }) => {
   }, []);
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#12071f] px-6">
+    <div className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-[#12071f] px-6">
       <Background />
       {/* Main Card */}
       <motion.div

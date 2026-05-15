@@ -10,7 +10,7 @@ import ProfileImage from "../../assets/images/avi.webp";
 
 const FinalWish = ({ name = "Bestie", onReplay }) => {
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#12071f] px-6 py-8">
+    <div className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-[#12071f] px-4 py-4">
       <Background />
 
       {/* Soft Glow */}
@@ -109,7 +109,7 @@ const FinalWish = ({ name = "Bestie", onReplay }) => {
           transition={{
             delay: 0.3,
           }}
-          className="mt-10 text-4xl font-black leading-tight text-white md:text-6xl"
+          className="mt-6 text-4xl font-black leading-tight text-white md:text-6xl"
         >
           Happy Birthday
           <span className="block bg-gradient-to-r from-pink-400 via-rose-300 to-violet-400 bg-clip-text text-transparent">
@@ -128,7 +128,7 @@ const FinalWish = ({ name = "Bestie", onReplay }) => {
           transition={{
             delay: 0.6,
           }}
-          className="mt-8 max-w-2xl text-lg leading-relaxed text-white/70 md:text-xl"
+          className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70 md:text-xl"
         >
           No matter how many birthdays come and go,
           <br />
@@ -148,7 +148,7 @@ const FinalWish = ({ name = "Bestie", onReplay }) => {
             duration: 2,
             repeat: Infinity,
           }}
-          className="mt-10 flex items-center gap-2 text-pink-300"
+          className="mt-6 flex items-center gap-2 text-pink-300"
         >
           <Heart className="h-5 w-5 fill-pink-300" />
 

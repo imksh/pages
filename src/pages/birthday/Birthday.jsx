@@ -51,7 +51,7 @@ const Birthday = () => {
     }
   };
 
-  return <div>{renderSteps()}</div>;
+  return <div className="overflow-x-hidden bg-[#12071f]">{renderSteps()}</div>;
 };
 
 export default Birthday;

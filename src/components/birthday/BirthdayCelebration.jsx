@@ -141,7 +141,7 @@ const BirthdayFireworks = ({ onContinue, name }) => {
   }, []);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-[#12071f]">
+    <div className="relative h-dvh w-full overflow-hidden bg-[#12071f]">
       <Background />
       {/* Fireworks Layer */}
       <div
@@ -207,7 +207,7 @@ const BirthdayFireworks = ({ onContinue, name }) => {
         </motion.p>
 
         {/* Floating Emojis */}
-        <div className="mt-10 flex gap-5 text-5xl">
+        <div className="mt-10 flex gap-5 text-3xl md:text-5xl">
           {["🎆", "🎇", "✨", "🎉", "💖"].map((emoji, i) => (
             <motion.div
               key={i}

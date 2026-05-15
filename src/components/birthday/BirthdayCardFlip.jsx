@@ -43,7 +43,7 @@ const BirthdayCardFlip = ({ onContinue, name, sender }) => {
   };
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#12071f] px-6">
+    <div className="relative flex min-h-dvh items-center justify-center overflow-hidden px-6 ">
       <Background />
 
       {/* Decorative Stars */}
@@ -78,7 +78,7 @@ const BirthdayCardFlip = ({ onContinue, name, sender }) => {
       {/* Card Container */}
       <div
         ref={cardRef}
-        className="relative z-20 h-[580px] w-[340px] cursor-pointer perspective-[2000px]"
+        className="relative z-20 h-[520px] w-[340px] cursor-pointer perspective-[2000px]"
         // onClick={() => setIsOpen(!isOpen)}
         // onMouseMove={handleMouseMove}
         // onMouseLeave={resetRotation}
@@ -236,7 +236,7 @@ const BirthdayCardFlip = ({ onContinue, name, sender }) => {
             />
 
             {/* Content */}
-            <div className="relative z-10 flex h-full flex-col items-center px-8 py-10 text-center">
+            <div className="relative z-10 flex h-full flex-col items-center p-6 text-center">
               {/* Profile */}
               <motion.div
                 animate={{
@@ -257,14 +257,14 @@ const BirthdayCardFlip = ({ onContinue, name, sender }) => {
                 />
               </motion.div>
 
-              <h2 className="mt-6 text-2xl font-black text-pink-500">HAPPY</h2>
+              <h2 className="mt-4 text-2xl font-black text-pink-500">HAPPY</h2>
 
               <h1 className="text-3xl font-black text-pink-400">BIRTHDAY</h1>
 
               {/* <p className="mt-2 text-lg text-pink-700">to you !</p> */}
 
               {/* Message */}
-              <div className="mt-6 rounded-2xl bg-white/40 p-5 text-left shadow-inner backdrop-blur-lg">
+              <div className="mt-4 rounded-2xl bg-white/40 p-5 text-left shadow-inner backdrop-blur-lg">
                 <p className="text-sm leading-relaxed text-pink-900">
                   Dear {name || "Friend"} ❤️
                   <br />
@@ -280,7 +280,7 @@ const BirthdayCardFlip = ({ onContinue, name, sender }) => {
               </div>
 
               {/* Footer */}
-              <div className="mt-6 flex items-center gap-2 text-pink-500">
+              <div className="mt-3 flex items-center gap-2 text-pink-500">
                 <Heart className="h-5 w-5 fill-pink-500" />
 
                 <span className="font-semibold">
@@ -302,7 +302,7 @@ const BirthdayCardFlip = ({ onContinue, name, sender }) => {
           e.stopPropagation();
           onContinue?.();
         }}
-        className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-pink-500 to-violet-600 px-6 py-3 font-semibold text-white shadow-xl absolute bottom-10 md:bottom-[80%] md:right-10"
+        className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-pink-500 to-violet-600 px-6 py-3 font-semibold text-white shadow-xl absolute bottom-8 md:bottom-[80%] md:right-10"
       >
         <PartyPopper className="h-5 w-5" />
         Continue

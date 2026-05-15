@@ -7,11 +7,11 @@ import Background from "./Background";
 
 const CakeTime = ({ onContinue }) => {
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-[#12071f]   px-6">
+    <div className="relative flex min-h-dvh overflow-hidden items-center justify-center bg-[#12071f]  px-6">
       <Background />
 
       {/* Main Content */}
-      <div className="relative z-10 flex w-full max-w-5xl flex-col items-center justify-center text-center">
+      <div className="relative z-10 flex w-full h-dvh  max-w-5xl flex-col items-center justify-center text-center">
         {/* Top Tag */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -26,7 +26,7 @@ const CakeTime = ({ onContinue }) => {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="text-5xl font-black leading-tight text-white md:text-7xl w-full flex items-center justify-center gap-3 flex-wrap"
+          className="text-4xl font-black leading-tight text-white md:text-7xl w-full flex items-center justify-center gap-2 flex-wrap"
         >
           Magical
           <span className="block bg-gradient-to-r from-pink-400 via-rose-300 to-yellow-300 bg-clip-text text-transparent">
@@ -39,7 +39,7 @@ const CakeTime = ({ onContinue }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="mt-5 max-w-2xl text-lg leading-relaxed text-white/70 md:text-xl"
+          className="mt-3 md:mt-5 max-w-2xl text-lg leading-relaxed text-white/70 md:text-xl"
         >
           Wishing you happiness, laughter and beautiful memories 💖
         </motion.p>
@@ -68,7 +68,7 @@ const CakeTime = ({ onContinue }) => {
 
           {/* Cake Container */}
           <div className="relative rounded-full border border-white/10 bg-white/10 p-8 shadow-2xl backdrop-blur-2xl">
-            <Lottie animationData={Cake} loop className="h-[220px] w-[220px]" />
+            <Lottie animationData={Cake} loop className="md:h-[220px] md:w-[220px] w-[180px] h-[180px]" />
           </div>
         </motion.div>
 
