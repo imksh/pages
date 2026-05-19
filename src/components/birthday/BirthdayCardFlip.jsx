@@ -211,6 +211,13 @@ const BirthdayCardFlip = ({ onContinue, data }) => {
               <p className="mt-10 text-sm font-medium uppercase tracking-[4px] text-pink-500">
                 Tap To Open
               </p>
+
+              <p className="font-medium uppercase tracking-[4px] text-pink-500">
+                {new Date(data.date).toLocaleDateString("en-US", {
+                  day: "numeric",
+                  month: "short",
+                })}
+              </p>
             </div>
           </div>
 
@@ -274,9 +281,8 @@ const BirthdayCardFlip = ({ onContinue, data }) => {
                   <br />
                   Happy Birthday 🎉
                   <br />
-                 {
-                  data.message || " I hope your day is filled with endless joy, happiness, laughter and unforgettable memories."
-                 }
+                  {data.message ||
+                    " I hope your day is filled with endless joy, happiness, laughter and unforgettable memories."}
                   <br />
                   <br />
                   Keep smiling and keep shining like always ✨

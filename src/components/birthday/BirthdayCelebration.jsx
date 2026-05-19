@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Background from "./Background";
-import { Heart, Sparkles } from "lucide-react";
+import { CalendarDays, Heart, Sparkles } from "lucide-react";
 import { useIsMobile } from "../../hooks/useIsMobile";
 
 const BirthdayFireworks = ({ onContinue, data }) => {
@@ -352,6 +352,69 @@ const BirthdayFireworks = ({ onContinue, data }) => {
           );
         })}
       </div>
+
+
+
+       {data?.date && (
+        <motion.div
+          drag
+          dragElastic={0.12}
+          dragMomentum={false}
+          dragConstraints={{
+            top: -120,
+            left: -120,
+            right: 120,
+            bottom: 120,
+          }}
+          initial={{
+            x: 0,
+            y: 0,
+            rotate: 12,
+          }}
+          animate={{
+            rotate: [-12, -8, -15, -10, -14, -12],
+          }}
+          transition={{
+            duration: 14,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute top-6 left-6 z-30 cursor-grab active:cursor-grabbing"
+        >
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-pink-500 via-fuchsia-500 to-amber-300 p-[2px] shadow-[0_20px_60px_rgba(236,72,153,0.35)]">
+            <div className="relative rounded-[calc(2rem-2px)] bg-slate-950/90 px-6 py-5 backdrop-blur-xl">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_45%)]" />
+
+              <div className="absolute -right-2 -top-2 rounded-2xl bg-amber-300 p-2 shadow-lg shadow-amber-300/30">
+                <Sparkles className="h-4 w-4 text-slate-950" />
+              </div>
+
+              <p className="text-[10px] uppercase tracking-[0.35em] text-pink-200">
+                Birthday Date
+              </p>
+
+              <div className="mt-3 flex items-center gap-3">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-400 to-fuchsia-500 shadow-lg shadow-pink-500/30">
+                  <CalendarDays className="h-7 w-7 text-white" />
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-bold text-white">
+                    {new Date(data.date).toLocaleDateString("en-US", {
+                      day: "numeric",
+                      month: "short",
+                    })}
+                  </h3>
+
+                  <p className="text-sm text-slate-300">
+                    Celebrate the special day 🎉
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
     </>
   );
 };

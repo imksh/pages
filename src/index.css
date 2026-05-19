@@ -246,3 +246,35 @@
 .empty-state-icon {
   @apply text-gray-300 text-6xl mb-4;
 }
+
+
+
+@keyframes floatingBirthday {
+  0% {
+    transform: translate(0px, 0px) rotate(12deg);
+  }
+
+  20% {
+    transform: translate(-18px, 12px) rotate(8deg);
+  }
+
+  40% {
+    transform: translate(14px, 28px) rotate(15deg);
+  }
+
+  60% {
+    transform: translate(26px, -10px) rotate(10deg);
+  }
+
+  80% {
+    transform: translate(-12px, -22px) rotate(14deg);
+  }
+
+  100% {
+    transform: translate(0px, 0px) rotate(12deg);
+  }
+}
+
+.animate-floatingBirthday {
+  animation: floatingBirthday 14s ease-in-out infinite;
+}

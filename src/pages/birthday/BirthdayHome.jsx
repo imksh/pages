@@ -132,6 +132,10 @@ const BirthdayCreatePage = () => {
 
       toast.success("Birthday page created");
     } catch (err) {
+       console.log(err.response?.data);
+
+  console.log(err.message);
+      
       toast.error(
         err?.response?.data?.message || err?.message || "Failed to create page",
       );
