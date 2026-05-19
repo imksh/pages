@@ -2,10 +2,13 @@ import React, { useRef, useState } from "react";
 import { motion, useMotionValue } from "framer-motion";
 import { Heart, Gift, Cake, PartyPopper } from "lucide-react";
 import Background from "./Background";
-import ProfileImage from "../../assets/images/avi.webp";
-import toast from "react-hot-toast";
+import ProfileImage from "../../assets/images/man.png";
 
-const BirthdayCardFlip = ({ onContinue, name, sender }) => {
+const BirthdayCardFlip = ({ onContinue, data }) => {
+  const recipientName = data?.name || "Friend";
+  const senderName = data?.sender || "Your Friend";
+  const coverImage = data?.images?.[0].url || ProfileImage;
+
   const [isOpen, setIsOpen] = useState(false);
 
   // Card Ref
@@ -251,8 +254,8 @@ const BirthdayCardFlip = ({ onContinue, name, sender }) => {
                 }}
               >
                 <img
-                  src={ProfileImage}
-                  alt=""
+                  src={coverImage}
+                  alt={recipientName}
                   className="h-24 w-24  rounded-full border-4 border-pink-400 shadow-lg object-center object-cover"
                 />
               </motion.div>
@@ -266,13 +269,14 @@ const BirthdayCardFlip = ({ onContinue, name, sender }) => {
               {/* Message */}
               <div className="mt-4 rounded-2xl bg-white/40 p-5 text-left shadow-inner backdrop-blur-lg">
                 <p className="text-sm leading-relaxed text-pink-900">
-                  Dear {name || "Friend"} ❤️
+                  Dear {recipientName} ❤️
                   <br />
                   <br />
                   Happy Birthday 🎉
                   <br />
-                  I hope your day is filled with endless joy, happiness,
-                  laughter and unforgettable memories.
+                 {
+                  data.message || " I hope your day is filled with endless joy, happiness, laughter and unforgettable memories."
+                 }
                   <br />
                   <br />
                   Keep smiling and keep shining like always ✨
@@ -283,9 +287,7 @@ const BirthdayCardFlip = ({ onContinue, name, sender }) => {
               <div className="mt-3 flex items-center gap-2 text-pink-500">
                 <Heart className="h-5 w-5 fill-pink-500" />
 
-                <span className="font-semibold">
-                  With Love • {sender || "Your Friend"}
-                </span>
+                <span className="font-semibold">With Love • {senderName}</span>
               </div>
             </div>
           </div>

@@ -1,92 +1,122 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import useAuthStore from "./store/useAuthStore";
+import useUiStore from "./store/useUiStore";
+import Loading from "./components/Loading";
+
+// Layouts
+import {
+  DefaultLayout,
+  MinimalLayout,
+  AuthLayout,
+  ProtectedLayout,
+  FullLayout,
+  BirthdayLayout,
+} from "./components/layouts";
+
+// Pages - Public
 import Home from "./pages/Home";
 import LoveMe from "./pages/LoveMe";
 import Galary from "./pages/Galary";
-import Bhawna from "./private/Bhawna";
-import PapaMummy from "./private/PapaMummy";
 import KaranGalary from "./pages/KaranGalary";
 import Paint from "./pages/Paint";
 import SnakeAndLadder from "./pages/SnakeAndLadder";
 import Ludo from "./pages/Ludo";
 import Camera from "./pages/Camera";
 import CurrencyConverter from "./pages/CurrencyConverter";
-import Error404 from "./pages/Error404";
 import Wonders from "./pages/Wonders";
-import Karan from "./pages/Reveal/Karan";
 import Reveal from "./pages/Reveal";
+import Karan from "./pages/Reveal/Karan";
 import Countdown from "./pages/Countdown";
-import Notes from "./pages/Notes";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import useAuthStore from "./store/useAuthStore";
-import Loading from "./components/Loading";
-import Profile from "./pages/Profile";
-import useUiStore from "./store/useUiStore";
 import MatchGrid from "./pages/MatchGrid";
 import ScanQR from "./pages/ScanQR";
+
+// Pages - Auth
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+
+// Pages - Protected
+import Profile from "./pages/Profile";
+import Notes from "./pages/Notes";
+
+// Pages - Private
+import Bhawna from "./private/Bhawna";
+import PapaMummy from "./private/PapaMummy";
+
+// Pages - Birthday
 import Birthday from "./pages/birthday/Birthday";
-import BirthdayLayout from "./components/layouts/BirthdayLayout";
+
+// Error Page
+import Error404 from "./pages/Error404";
+import BirthdayHome from "./pages/birthday/BirthdayHome";
+import { Scroll } from './components/Scroll';
 
 const App = () => {
   const { user, isChecking, checkAuth } = useAuthStore();
   const { setShowHeader } = useUiStore();
 
   useEffect(() => {
-    const fun = () => {
-      checkAuth();
-    };
-    fun();
-  }, []);
+    checkAuth();
+  }, [checkAuth]);
 
   return (
-    <div
-      onClick={() => {
-        setShowHeader(false);
-      }}
-    >
+    <div onClick={() => setShowHeader(false)}>
       <BrowserRouter>
+        <Scroll/>
         <Routes>
-          {/* Auth */}
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={user ? <Home /> : <Login />} />
-          <Route path="/register" element={user ? <Home /> : <Register />} />
-          <Route path="/profile" element={user ? <Profile /> : <Login />} />
-
-          {/* Auth Based */}
-          <Route path="/notes" element={user ? <Notes /> : <Login />} />
-
-          {/* Public */}
-          <Route path="/loveMe" element={<LoveMe />} />
-          <Route path="/snake-and-ladder" element={<SnakeAndLadder />} />
-          <Route path="/galary" element={<Galary />} />
-          <Route path="/private/bhawna" element={<Bhawna />} />
-          <Route path="/private/papa-mummy" element={<PapaMummy />} />
-          <Route path="/galary/karan-galary" element={<KaranGalary />} />
-          <Route path="/paint" element={<Paint />} />
-          <Route path="/ludo" element={<Ludo />} />
-          <Route path="/camera" element={<Camera />} />
-          <Route path="/wonders" element={<Wonders />} />
-          <Route path="/currency-converter" element={<CurrencyConverter />} />
-          <Route path="/reveal" element={<Reveal />} />
-          <Route path="/reveal/karan" element={<Karan />} />
-          <Route path="/match-grid" element={<MatchGrid />} />
-          <Route path="/scan-qr" element={<ScanQR />} />
-
-          {/* Query Based */}
-          <Route path="/countdown" element={<Countdown />} />
-          <Route
-            path="/countdown/:start/:date/:title/:message/:theme/:animation"
-            element={<Countdown />}
-          />
-
-          {/* Error 404 */}
-          <Route path="/*" element={<Error404 />} />
-
-          <Route element={<BirthdayLayout />}>
-            <Route path="/birthday/:name" element={<Birthday />} />
-            <Route path="/birthday/:name/:sender" element={<Birthday />} />
+          {/* ===== PUBLIC ROUTES ===== */}
+          <Route element={<DefaultLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/loveMe" element={<LoveMe />} />
+            <Route path="/snake-and-ladder" element={<SnakeAndLadder />} />
+            <Route path="/galary" element={<Galary />} />
+            <Route path="/galary/karan-galary" element={<KaranGalary />} />
+            <Route path="/paint" element={<Paint />} />
+            <Route path="/ludo" element={<Ludo />} />
+            <Route path="/camera" element={<Camera />} />
+            <Route path="/wonders" element={<Wonders />} />
+            <Route path="/currency-converter" element={<CurrencyConverter />} />
+            <Route path="/reveal" element={<Reveal />} />
+            <Route path="/reveal/karan" element={<Karan />} />
+            <Route path="/match-grid" element={<MatchGrid />} />
+            <Route path="/scan-qr" element={<ScanQR />} />
           </Route>
+
+          {/* ===== COUNTDOWN ROUTES ===== */}
+          <Route element={<MinimalLayout />}>
+            <Route path="/countdown" element={<Countdown />} />
+            <Route
+              path="/countdown/:start/:date/:title/:message/:theme/:animation"
+              element={<Countdown />}
+            />
+          </Route>
+
+          {/* ===== PRIVATE ROUTES ===== */}
+          <Route element={<DefaultLayout />}>
+            <Route path="/private/bhawna" element={<Bhawna />} />
+            <Route path="/private/papa-mummy" element={<PapaMummy />} />
+          </Route>
+
+          {/* ===== AUTH ROUTES ===== */}
+          <Route element={<AuthLayout />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
+
+          {/* ===== PROTECTED ROUTES ===== */}
+          <Route element={<ProtectedLayout />}>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/notes" element={<Notes />} />
+          </Route>
+
+          {/* ===== BIRTHDAY ROUTES ===== */}
+          <Route element={<BirthdayLayout />}>
+            <Route path="/birthday" element={<BirthdayHome />} />
+            <Route path="/birthday/:id" element={<Birthday />} />
+          </Route>
+
+          {/* ===== ERROR ROUTE ===== */}
+          <Route path="/*" element={<Error404 />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import { IoCreateOutline } from "react-icons/io5";
 import notes from "../assets/animations/notes.json";
 import Lottie from "lottie-react";
-import api from "../utils/axios.js";
+import api from "../config/api";
 import { toast } from "react-hot-toast";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";

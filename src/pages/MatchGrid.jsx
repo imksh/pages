@@ -5,7 +5,7 @@ import Pookie from "../assets/animations/pookie.json";
 import Lottie from "lottie-react";
 import useAuthStore from "../store/useAuthStore";
 import Login from "./Login";
-import api from "../utils/axios";
+import api from "../config/api";
 import { useNavigate } from "react-router-dom";
 import trophy from "../assets/animations/trophy.json";
 import useWindowSize from "../hooks/useWindowSize";

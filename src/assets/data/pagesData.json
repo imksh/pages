@@ -1,5 +1,12 @@
 [
   {
+    "title": "Birthday Wisher",
+    "link": "/birthday",
+    "img": "/images/home/birthday.png",
+    "tech": "React , Node, MongoDB, Express, JavaScript, Tailwind, API",
+    "desc": "A birthday wisher app that allows users to create and manage birthday wishes for their loved ones. Users can add new wishes, view existing wishes, and receive notifications on the birthday of their friends and family members."
+  },
+  {
     "title": "ScanQR",
     "link": "/scan-qr",
     "img": "/images/home/devlopment.png",

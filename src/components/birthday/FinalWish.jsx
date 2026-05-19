@@ -1,14 +1,17 @@
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  Heart,
-  Sparkles,
-  RotateCcw,
-} from "lucide-react";
+import { Heart, Sparkles, RotateCcw } from "lucide-react";
 import Background from "./Background";
-import ProfileImage from "../../assets/images/avi.webp";
+import ProfileImage from "../../assets/images/man.png";
 
-const FinalWish = ({ name = "Bestie", onReplay }) => {
+const FinalWish = ({ data, name = "Bestie", onReplay }) => {
+  const recipientName = data?.name || name;
+  const senderName =data?.sender || "Your Friend";
+  const coverImage = data?.images?.[0].url || ProfileImage;
+  const wishMessage =
+    data?.message ||
+    "No matter how many birthdays come and go, I just hope you always stay happy, keep smiling and achieve everything you dream of ✨";
+
   return (
     <div className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-[#12071f] px-4 py-4">
       <Background />
@@ -87,8 +90,8 @@ const FinalWish = ({ name = "Bestie", onReplay }) => {
           <div className="absolute inset-0 rounded-full bg-pink-500/30 blur-3xl" />
 
           <img
-            src={ProfileImage}
-            alt="Profile"
+            src={coverImage}
+            alt={recipientName}
             className="relative z-10 h-40 w-40 rounded-full border-4 border-pink-400 object-cover shadow-2xl"
             style={{
               clipPath: "circle(50%)",
@@ -113,7 +116,7 @@ const FinalWish = ({ name = "Bestie", onReplay }) => {
         >
           Happy Birthday
           <span className="block bg-gradient-to-r from-pink-400 via-rose-300 to-violet-400 bg-clip-text text-transparent">
-            {name} 💖
+            {recipientName} 💖
           </span>
         </motion.h1>
 
@@ -130,13 +133,10 @@ const FinalWish = ({ name = "Bestie", onReplay }) => {
           }}
           className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70 md:text-xl"
         >
-          No matter how many birthdays come and go,
-          <br />
-          I just hope you always stay happy,
-          keep smiling and achieve everything you dream of ✨
+          {wishMessage}
           <br />
           <br />
-          Thank you for being such a beautiful part of life 💖
+          Thank you for being such a beautiful part of life, {senderName} 💖
         </motion.p>
 
         {/* Bottom Text */}

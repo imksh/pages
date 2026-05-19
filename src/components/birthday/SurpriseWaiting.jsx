@@ -3,7 +3,9 @@ import { motion } from "framer-motion";
 import { Gift, Sparkles, ArrowRight } from "lucide-react";
 import Background from "./Background";
 
-const SurpriseWaiting = ({ onContinue, name }) => {
+const SurpriseWaiting = ({ onContinue, data }) => {
+  const recipientName =data?.name || "you";
+
   // Generate particles once only
   const particles = useMemo(() => {
     return [...Array(15)].map((_, i) => ({
@@ -50,7 +52,7 @@ const SurpriseWaiting = ({ onContinue, name }) => {
         >
           A Surprise
           <span className="block bg-gradient-to-r from-pink-400 to-violet-400 bg-clip-text text-transparent">
-            Is Waiting For You {name} ✨
+            Is Waiting For You {recipientName} ✨
           </span>
         </motion.h1>
 
@@ -61,8 +63,8 @@ const SurpriseWaiting = ({ onContinue, name }) => {
           transition={{ delay: 0.4 }}
           className="relative z-10 mt-6 text-center text-base leading-relaxed text-white/70 md:text-lg"
         >
-          Something magical has been prepared just for you. Get ready for an
-          unforgettable birthday experience ✨
+          Something magical has been prepared for {recipientName}. Get ready for
+          an unforgettable birthday experience ✨
         </motion.p>
 
         {/* Sparkles */}

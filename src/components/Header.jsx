@@ -32,7 +32,7 @@ const Header = ({
   };
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-99 ${
+      className={`sticky top-0 left-0 w-full z-99 ${
         color ? color : "bg-blue-600"
       } ${
         showHeader ? "rounded-b-2xl" : ""

@@ -1,8 +1,23 @@
 @import "tailwindcss";
 
+/* Modern Shadows */
 .shadow {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+.shadow-soft {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-medium {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.shadow-elevation {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Modern Gradients */
 .gradient1 {
   background-image: linear-gradient(
     to right bottom,
@@ -96,7 +111,9 @@
     rgba(0, 0, 0, 0) 90%
   );
 
-  transition: mask-image 0.15s ease, -webkit-mask-image 0.15s ease;
+  transition:
+    mask-image 0.15s ease,
+    -webkit-mask-image 0.15s ease;
 }
 
 .reveal:hover {
@@ -155,4 +172,77 @@
   p {
     font-size: 14px;
   }
+}
+
+/* Modern Filter Styles */
+.filter-badge {
+  @apply px-4 py-2 rounded-full font-medium transition-all duration-300 cursor-pointer;
+}
+
+.filter-badge-active {
+  @apply bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg;
+}
+
+.filter-badge-inactive {
+  @apply bg-gray-100 text-gray-700 hover:bg-gray-200;
+}
+
+/* Smooth Transitions */
+* {
+  @apply transition-colors duration-200;
+}
+
+/* Filter Button Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-panel {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Card Hover Effect */
+.card-hover {
+  @apply transition-all duration-300;
+}
+
+.card-hover:hover {
+  @apply shadow-2xl -translate-y-2;
+}
+
+/* Search Input Focus */
+.search-input {
+  @apply transition-all duration-300;
+}
+
+.search-input:focus {
+  @apply ring-2 ring-blue-500 ring-offset-2;
+}
+
+/* Tech Badge Gradient */
+.tech-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  @apply text-white font-semibold px-3 py-1 rounded-full text-xs;
+}
+
+/* Active Filter Indicator */
+.filter-count-badge {
+  @apply inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full;
+}
+
+/* Project Grid Animation */
+.projects-grid {
+  @apply grid gap-6 auto-rows-max;
+}
+
+/* Empty State Icon */
+.empty-state-icon {
+  @apply text-gray-300 text-6xl mb-4;
 }
