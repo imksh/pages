@@ -372,14 +372,14 @@ const BirthdayFireworks = ({ onContinue, data }) => {
             rotate: 12,
           }}
           animate={{
-            rotate: [-12, -8, -15, -10, -14, -12],
+            rotate: [12, 8, 15, 10, 14, 12],
           }}
           transition={{
             duration: 14,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute bottom-2 right-2 md:top-6 md:left-6 z-30 cursor-grab active:cursor-grabbing"
+          className="absolute overflow-hidden top-3 right-3  z-30 cursor-grab active:cursor-grabbing rounded-[2rem]"
         >
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-pink-500 via-fuchsia-500 to-amber-300 p-[2px] shadow-[0_20px_60px_rgba(236,72,153,0.35)]">
             <div className="relative rounded-[calc(2rem-2px)] bg-slate-950/90 px-6 py-5 backdrop-blur-xl">
@@ -390,7 +390,7 @@ const BirthdayFireworks = ({ onContinue, data }) => {
               </div>
 
               <p className="text-[10px] uppercase tracking-[0.35em] text-pink-200">
-                Birthday Date
+                Birthdate
               </p>
 
               <div className="mt-3 flex items-center gap-3">

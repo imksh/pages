@@ -12,7 +12,7 @@ const CakeTime = ({ onContinue, data }) => {
 
   return (
     <>
-      <div className="relative flex min-h-dvh overflow-hidden items-center justify-center bg-[#12071f]  px-6">
+      <div className="overflow-hidden relative flex min-h-dvh  items-center justify-center bg-[#12071f]  px-6">
         <Background />
 
         {/* Main Content */}
@@ -245,9 +245,9 @@ const CakeTime = ({ onContinue, data }) => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute bottom-2 right-2 lg:top-6 lg:right-6 z-30 cursor-grab active:cursor-grabbing"
+          className="absolute overflow-hidden bottom-1/2 right-8  md:bottom-28 md:right-32 z-30 cursor-grab active:cursor-grabbing rounded-[2rem]"
         >
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-pink-500 via-fuchsia-500 to-amber-300 p-[2px] shadow-[0_20px_60px_rgba(236,72,153,0.35)] max-h-20">
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-pink-500 via-fuchsia-500 to-amber-300 p-[2px] shadow-[0_20px_60px_rgba(236,72,153,0.35)] max-h-20 md:max-h-full">
             <div className="relative rounded-[calc(2rem-2px)] bg-slate-950/90 px-6 py-5 backdrop-blur-xl">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_45%)] " />
 

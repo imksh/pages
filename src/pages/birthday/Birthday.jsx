@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import FinalWish from "../../components/birthday/FinalWish";
 import Loading from "../../components/Loading";
 import api from "../../config/api";
+import Background from "../../components/birthday/Background";
 
 const Birthday = () => {
   const [steps, setSteps] = useState(1);
@@ -74,8 +75,9 @@ const Birthday = () => {
 
   if (isLoading) {
     return (
-      <div className="relative min-h-screen overflow-hidden ">
-        <Loading bg="bg-[#050816]" size="w-44 h-44" />
+      <div className="relative min-h-screen overflow-hidden bg-[#050816]">
+        <Background />
+        <Loading bg="transparent" size="w-44 h-44" />
       </div>
     );
   }

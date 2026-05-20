@@ -19,6 +19,7 @@ import {
 import api from "../../config/api";
 import { IoIosClose } from "react-icons/io";
 import Loading from "../../components/Loading";
+import Background from "../../components/birthday/Background";
 
 const BirthdayCreatePage = () => {
   const [form, setForm] = useState({
@@ -132,10 +133,10 @@ const BirthdayCreatePage = () => {
 
       toast.success("Birthday page created");
     } catch (err) {
-       console.log(err.response?.data);
+      console.log(err.response?.data);
 
-  console.log(err.message);
-      
+      console.log(err.message);
+
       toast.error(
         err?.response?.data?.message || err?.message || "Failed to create page",
       );
@@ -146,6 +147,7 @@ const BirthdayCreatePage = () => {
 
   return (
     <div className="min-h-screen bg-[#050816] text-white">
+      <Background />
       <main className="mx-auto flex min-h-screen max-w-6xl items-center justify-center px-4 py-10">
         {!isCreated ? (
           <form
