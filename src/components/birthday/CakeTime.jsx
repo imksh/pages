@@ -103,7 +103,7 @@ const CakeTime = ({ onContinue, data }) => {
               scale: 0.95,
             }}
             onClick={onContinue}
-            className="mt-8 flex items-center gap-3 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-violet-600 px-8 py-4 text-lg font-semibold text-white shadow-2xl shadow-pink-500/30"
+            className="mt-8 flex items-center gap-3 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-violet-600 px-8 py-4 text-lg font-semibold text-white shadow-2xl shadow-pink-500/30 z-50"
           >
             <Gift className="h-5 w-5" />
             Celebrate Now 🎉
@@ -245,22 +245,22 @@ const CakeTime = ({ onContinue, data }) => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-6 right-6 z-30 cursor-grab active:cursor-grabbing"
+          className="absolute bottom-2 right-2 lg:top-6 lg:right-6 z-30 cursor-grab active:cursor-grabbing"
         >
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-pink-500 via-fuchsia-500 to-amber-300 p-[2px] shadow-[0_20px_60px_rgba(236,72,153,0.35)]">
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-pink-500 via-fuchsia-500 to-amber-300 p-[2px] shadow-[0_20px_60px_rgba(236,72,153,0.35)] max-h-20">
             <div className="relative rounded-[calc(2rem-2px)] bg-slate-950/90 px-6 py-5 backdrop-blur-xl">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_45%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_45%)] " />
 
               <div className="absolute -right-2 -top-2 rounded-2xl bg-amber-300 p-2 shadow-lg shadow-amber-300/30">
                 <Sparkles className="h-4 w-4 text-slate-950" />
               </div>
 
-              <p className="text-[10px] uppercase tracking-[0.35em] text-pink-200">
+              <p className="text-[10px] hidden md:flex uppercase tracking-[0.35em] text-pink-200">
                 Birthday Date
               </p>
 
-              <div className="mt-3 flex items-center gap-3">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-400 to-fuchsia-500 shadow-lg shadow-pink-500/30">
+              <div className="md:mt-3 flex items-center gap-3">
+                <div className="hidden md:flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-400 to-fuchsia-500 shadow-lg shadow-pink-500/30">
                   <CalendarDays className="h-7 w-7 text-white" />
                 </div>
 
@@ -272,7 +272,7 @@ const CakeTime = ({ onContinue, data }) => {
                     })}
                   </h3>
 
-                  <p className="text-sm text-slate-300">
+                  <p className="hidden md:flex text-sm text-slate-300">
                     Celebrate the special day 🎉
                   </p>
                 </div>

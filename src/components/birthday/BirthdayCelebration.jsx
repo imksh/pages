@@ -379,7 +379,7 @@ const BirthdayFireworks = ({ onContinue, data }) => {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-6 left-6 z-30 cursor-grab active:cursor-grabbing"
+          className="absolute bottom-2 right-2 md:top-6 md:left-6 z-30 cursor-grab active:cursor-grabbing"
         >
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-pink-500 via-fuchsia-500 to-amber-300 p-[2px] shadow-[0_20px_60px_rgba(236,72,153,0.35)]">
             <div className="relative rounded-[calc(2rem-2px)] bg-slate-950/90 px-6 py-5 backdrop-blur-xl">
@@ -394,7 +394,7 @@ const BirthdayFireworks = ({ onContinue, data }) => {
               </p>
 
               <div className="mt-3 flex items-center gap-3">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-400 to-fuchsia-500 shadow-lg shadow-pink-500/30">
+                <div className="hidden md:flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-400 to-fuchsia-500 shadow-lg shadow-pink-500/30">
                   <CalendarDays className="h-7 w-7 text-white" />
                 </div>
 
@@ -406,7 +406,7 @@ const BirthdayFireworks = ({ onContinue, data }) => {
                     })}
                   </h3>
 
-                  <p className="text-sm text-slate-300">
+                  <p className="hidden md:flex text-sm text-slate-300">
                     Celebrate the special day 🎉
                   </p>
                 </div>
