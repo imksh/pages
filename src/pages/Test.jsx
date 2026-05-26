@@ -169,28 +169,24 @@ const Test = () => {
   const [animating, setAnimating] = useState(null);
   // wheel/throttle handling with slip animations
   const lastWheelRef = React.useRef(0);
-  const handleWheel = (e) => {
-    e.preventDefault();
-    if (animating) return; // ignore wheel while animating
+  const touchStartRef = React.useRef(null);
+
+  const handleSlip = (direction) => {
+    if (animating) return;
     const now = Date.now();
     if (now - lastWheelRef.current < 300) return; // throttle
     lastWheelRef.current = now;
 
-    if (e.deltaY > 0) {
-      // scroll down: remove first visible -> animate out, append one from bottomStack and animate in
+    if (direction === "down") {
       if (bottomStack.length === 0) return;
       const removed = visibleItems[0];
       const added = bottomStack[0];
       if (!removed || !added) return;
-      // guard: don't duplicate if somehow already present
       if (visibleItems.some((it) => it.id === added.id)) return;
-      // append the new item visually while keeping removed present for outgoing animation
       setVisibleItems((prev) => [...prev, added]);
       setAnimating({ type: "down", removedId: removed.id, addedId: added.id });
-      // after animation, actually move items between stacks
       setTimeout(() => {
         setVisibleItems((prev) => {
-          // remove only one instance of removed.id
           const idx = prev.findIndex((it) => it.id === removed.id);
           if (idx === -1) return prev;
           const copy = [...prev];
@@ -201,14 +197,12 @@ const Test = () => {
         setBottomStack((b) => b.slice(1));
         setAnimating(null);
       }, 350);
-    } else {
-      // scroll up: bring one from topStack into visible at start and remove last visible to bottomStack
+    } else if (direction === "up") {
       if (topStack.length === 0) return;
       const removed = visibleItems[visibleItems.length - 1];
       const added = topStack[0];
       if (!removed || !added) return;
       if (visibleItems.some((it) => it.id === added.id)) return;
-      // prepend the added item visually while keeping removed for outgoing animation
       setVisibleItems((prev) => [added, ...prev]);
       setAnimating({ type: "up", removedId: removed.id, addedId: added.id });
       setTimeout(() => {
@@ -224,6 +218,30 @@ const Test = () => {
         setAnimating(null);
       }, 350);
     }
+  };
+
+  const handleWheel = (e) => {
+    e.preventDefault();
+    handleSlip(e.deltaY > 0 ? "down" : "up");
+  };
+
+  const onTouchStart = (e) => {
+    touchStartRef.current = e.touches?.[0]?.clientY ?? null;
+  };
+
+  const onTouchMove = (e) => {
+    if (touchStartRef.current == null) return;
+    const currentY = e.touches?.[0]?.clientY ?? 0;
+    const dy = touchStartRef.current - currentY; // positive => finger moved up
+    const threshold = 30; // px
+    if (Math.abs(dy) > threshold) {
+      handleSlip(dy > 0 ? "down" : "up");
+      touchStartRef.current = null; // reset to avoid multiple triggers
+    }
+  };
+
+  const onTouchEnd = () => {
+    touchStartRef.current = null;
   };
 
   const visibleStack = bottomStack.slice(0, peekCount);
@@ -242,7 +260,13 @@ const Test = () => {
         .outgoing-up { animation: outgoing-up 320ms cubic-bezier(.2,.9,.2,1) forwards }
         @keyframes outgoing-up { from { transform: translateY(0) scale(1); opacity: 1 } to { transform: translateY(18px) scale(.98); opacity: 0 } }
       `}</style>
-      <aside className="w-[360px] relative" onWheel={handleWheel}>
+      <aside
+        className="w-[360px] relative"
+        onWheel={handleWheel}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         {/* top stack (cards that scrolled out of view at the top) */}
         <div className="absolute left-0 -top-[140px] w-full pointer-events-auto flex justify-center">
           <div className="relative w-full h-[140px]">
