@@ -50,6 +50,7 @@ import Birthday from "./pages/birthday/Birthday";
 import Error404 from "./pages/Error404";
 import BirthdayHome from "./pages/birthday/BirthdayHome";
 import { Scroll } from './components/Scroll';
+import Test from "./pages/Test";
 
 const App = () => {
   const { user, isChecking, checkAuth } = useAuthStore();
@@ -80,6 +81,7 @@ const App = () => {
             <Route path="/reveal/karan" element={<Karan />} />
             <Route path="/match-grid" element={<MatchGrid />} />
             <Route path="/scan-qr" element={<ScanQR />} />
+            <Route path="/test" element={<Test/>} />
           </Route>
 
           {/* ===== COUNTDOWN ROUTES ===== */}
