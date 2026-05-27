@@ -248,7 +248,7 @@ const Test = () => {
   const visibleTopStack = topStack.slice(0, peekCount);
 
   return (
-    <div className="min-h-screen bg-slate-50 flex justify-center px-6 py-1">
+    <div className="min-h-dvh bg-slate-50 flex justify-center px-6 py-1">
       <style>{`
         .incoming-down { animation: incoming-down 320ms cubic-bezier(.2,.9,.2,1) forwards }
         @keyframes incoming-down { from { transform: translateY(18px) scale(.98); opacity: 0 } to { transform: translateY(0) scale(1); opacity: 1 } }
@@ -269,30 +269,30 @@ const Test = () => {
       >
         {/* top stack (cards that scrolled out of view at the top) */}
         <div className="absolute left-0 -top-[140px] w-full pointer-events-auto flex justify-center">
-          <div className="relative w-full h-[140px]">
+          <div className="relative w-full h-[140px] top-50">
             {visibleTopStack.map((item, idx) => {
-              const topOffset = (visibleTopStack.length - 1 - idx) * 14; // idx 0 = closest to list -> largest offset
+              const topOffset = (visibleTopStack.length - 1 - idx) * 12; // idx 0 = closest to list -> largest offset
               const scale = 1 - idx * 0.02;
               const z = 300 + (visibleTopStack.length - idx);
               const isTop = idx === 0; // closest to list
               return (
-                <div
+                <div 
                   key={item.id}
                   style={{
                     position: "absolute",
                     left: 0,
-                    // top: `${topOffset}px`,
+                    top: `${topOffset}px`,
                     transform: `scale(${scale})`,
                     zIndex: z,
                     width: "100%",
                   }}
-                  className="top-50"
+                //   className="top-50"
                 >
                   <Card
                     item={item}
                     onClick={() => setSelected(item)}
                     // make card full width like bottom stack
-                    // style={{ width: "320px" }}
+                    style={{ position: "absolute" }}
                   />
                 </div>
               );
@@ -354,27 +354,10 @@ const Test = () => {
                     // style={{ width: "320px" }}
                   />
 
-                  {/* {isTop && (
-                    <div className="absolute right-[-32px] top-2 flex items-center gap-2">
-                      <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-md">
-                        👁️
-                      </div>
-                      <div className="w-10 h-10 rounded-full bg-[#3f3f74] text-white flex items-center justify-center font-extrabold shadow-md">
-                        {bottomStack.length - visibleStack.length > 0
-                          ? bottomStack.length - visibleStack.length
-                          : bottomStack.length}
-                      </div>
-                    </div>
-                  )} */}
+                 
                 </div>
               );
             })}
-
-            {/* {bottomStack.length > visibleStack.length && (
-              <div className="absolute right-[-6px] top-0 w-10 h-10 rounded-full bg-[#3f3f74] text-white flex items-center justify-center font-extrabold shadow-lg">
-                {bottomStack.length - visibleStack.length}+
-              </div>
-            )} */}
           </div>
         </div>
       </aside>
